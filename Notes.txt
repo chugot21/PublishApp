@@ -1,0 +1,29 @@
+
+BACK
+
+Modeles :
+- User : atributs : ID, pseudo, nom, prenom, date de naissance : herite de la classe IdentityUser
+        (option) photo profil
+- Post : Id, titre, contenu, date de creation, utilisateur lie (one to one)
+
+Controller :
+- User : POST-login (pseudo, mdp hashe)
+        GET-rechercher un user
+        (option) PUT-modif user (tout peut changer sauf pseudo)
+- Post : POST-create(titre, contenu)
+        DELETE dernier post uniquement et si user
+
+DTO:
+- Post : date, contenu, user 
+
+=> Schema DB avec EF
+
+
+FRONT 
+
+Pages :
+- Login -> page erreur
+        -> page des posts + bouton nouveau post : ordre chronologique + pagination des posts (20 derniers) -> pseudo, contenu, bouton
+                            -> "page" creation en modale pour nv post.
+                            -> filtre recherche user pour voir leur comments.
+        -> (option) page modif profil
