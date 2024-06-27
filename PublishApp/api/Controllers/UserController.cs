@@ -1,8 +1,10 @@
-using api.DataBase;
+using api.Data;
+using api.Dtos.Post;
 using api.Dtos.User;
 using api.Interfaces;
 using api.Mappers;
 using api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,15 +19,18 @@ public class UserController : ControllerBase
     private readonly UserManager<User> _userManager;
     private readonly ITokenService _tokenService;
     private readonly SignInManager<User> _signinManager;
+    private readonly IPostRepository _postRepository;
 
-    public UserController(UserManager<User> userManager, ITokenService tokenService, SignInManager<User> signInManager)
+    public UserController(UserManager<User> userManager, ITokenService tokenService, SignInManager<User> signInManager, IPostRepository postRepository)
     {
         _userManager = userManager;
         _tokenService = tokenService;
         _signinManager = signInManager;
+        _postRepository = postRepository;
     }
 
-    [HttpGet("{username}")]
+    /*[HttpGet("{username}")]
+    [Authorize]
     public async Task<IActionResult> GetById([FromRoute] string username)
     {
         var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName.ToLower() == username.ToLower());
@@ -39,15 +44,35 @@ public class UserController : ControllerBase
             {
                 Username = user.UserName,
                 FirstName = user.FirstName,
-                LastName = user.FirstName,
+                LastName = user.LastName,
+                BornDateTime = user.BornDateTime
+            }
+        );
+    }*/
+    
+    [HttpGet("{username}")]
+    [Authorize]
+    public async Task<IActionResult> GetPostsByUserId([FromRoute] string username)
+    {
+        var user = await _userManager.Users.Include(p => p.Posts).FirstOrDefaultAsync(u => u.UserName.ToLower() == username.ToLower());
+        if (user == null)
+        {
+            return NoContent();
+        }
+        
+        return Ok(
+            new UserPostsDto
+            {
+                Username = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
                 BornDateTime = user.BornDateTime,
-                Posts = user.Posts.Select(c => c.ToPostDto()).ToList()
+                Posts = user.Posts.Select(p => p.ToPostDtoUnderUser()).ToList()
             }
         );
     }
     
     [HttpPost("login")]
-
     public async Task<IActionResult> Login(LoginDto loginDto)
     {
         if (!ModelState.IsValid)
@@ -66,9 +91,70 @@ public class UserController : ControllerBase
             new NewUserDto
             {
                 UserName = user.UserName,
-                Email = user.Email,
                 Token = _tokenService.CreateToken(user)
             }
         );
+    }
+
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
+    {
+        try
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var user = new User
+            {
+                UserName = registerDto.Username,
+                FirstName = registerDto.FirstName,
+                LastName = registerDto.LastName,
+                BornDateTime = registerDto.BornDateTime
+            };
+
+            var createdUser = await _userManager.CreateAsync(user, registerDto.Password);
+
+            if (createdUser.Succeeded)
+            {
+                return Ok(
+                    new NewUserDto
+                    {
+                        UserName = user.UserName,
+                        Token = _tokenService.CreateToken(user)
+                    });
+            }
+            else
+            {
+                return StatusCode(500, createdUser.Errors);
+            }
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e);
+        }
+    }
+
+    [HttpPut]
+    [Route("{id}")]
+
+    public async Task<IActionResult> Update([FromRoute] string id, [FromBody] UpdateUserDto updateDto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
+            return NotFound(0);
+
+        var userModel = new UpdateUserDto
+        {
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            BornDateTime = user.BornDateTime
+        };
+        // var userModel = await _userManager.UpdateUserAsync(id, updateDto);
+        // if (userModel == null)
+        //     return NotFound();
+        return Ok("Profil updated");
     }
 }

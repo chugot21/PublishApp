@@ -1,6 +1,8 @@
 
 BACK
 
+utilisation de pgAdmin 4 pour la DB postgresql.
+
 Modeles :
 - User : atributs : ID, pseudo, nom, prenom, date de naissance : herite de la classe IdentityUser
         (option) photo profil
@@ -27,3 +29,8 @@ Pages :
                             -> "page" creation en modale pour nv post.
                             -> filtre recherche user pour voir leur comments.
         -> (option) page modif profil
+
+
+A eclaircir :
+- claims
+- roles user
