@@ -12,8 +12,8 @@ public class UserDto
     public string? FirstName { get; set; }
     [Required]
     public string? LastName { get; set; }
-    //[DataType(DataType.Date)]
     [Required]
+    //[DataType(DataType.Date)]
     public DateTime BornDateTime { get; set; }
     //[Required]
     //public string? Password { get; set; }

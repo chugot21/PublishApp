@@ -24,14 +24,4 @@ public static class PostMapper
             Content = postModel.Content
         };
     }
-
-    // public static Post ToPostFromCreate(this CreatePostRequestDto postDto, int userId)
-    // {
-    //     return new Post
-    //     {
-    //         Title = postDto.Title,
-    //         Content = postDto.Content,
-    //         UserId = userId
-    //     };
-    // }
 }

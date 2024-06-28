@@ -136,6 +136,7 @@ public class UserController : ControllerBase
 
     [HttpPut]
     [Route("{id}")]
+    [Authorize]
 
     public async Task<IActionResult> Update([FromRoute] string id, [FromBody] UpdateUserDto updateDto)
     {
@@ -145,16 +146,14 @@ public class UserController : ControllerBase
         var user = await _userManager.FindByIdAsync(id);
         if (user == null)
             return NotFound(0);
-
-        var userModel = new UpdateUserDto
-        {
-            FirstName = user.FirstName,
-            LastName = user.LastName,
-            BornDateTime = user.BornDateTime
-        };
+        
+        user.FirstName = updateDto.FirstName;
+        user.LastName = updateDto.LastName;
+        user.BornDateTime = updateDto.BornDateTime;
         // var userModel = await _userManager.UpdateUserAsync(id, updateDto);
         // if (userModel == null)
         //     return NotFound();
-        return Ok("Profil updated");
+        await _userManager.UpdateAsync(user);
+        return Ok("User was update");
     }
 }
