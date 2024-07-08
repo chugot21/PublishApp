@@ -9,7 +9,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="359cb3d2-7908-440b-80b9-8b575ad7f481" name="Changes" comment="" />
+    <list default="true" id="359cb3d2-7908-440b-80b9-8b575ad7f481" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/app.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/auth.guard.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/auth.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/login/login.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/login/login.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/models/userandpost.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/post/post.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/post/post.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/posts.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PublishApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PublishApp/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/obj/api.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/api.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/obj/api.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/api.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/rider.project.restore.info" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +39,9 @@
   </component>
   <component name="DpaMonitoringSettings">
     <option name="autoShow" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/b8139c5ee58f1708b0e3368a1b241400edd6cbc4/src/Identity/EntityFrameworkCore/src/IdentityDbContext.cs" root0="SKIP_HIGHLIGHTING" />
@@ -36,28 +61,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.api: IIS Express.executor&quot;: &quot;Debug&quot;,
-    &quot;.NET Project..Net Debugger.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/sixmon/Documents/Projets/PublishApp&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.api: IIS Express.executor": "Debug",
+    ".NET Project..Net Debugger.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/sixmon/Documents/Projets/PublishApp",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\sixmon\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\sixmon\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\sixmon\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\sixmon\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\sixmon\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\sixmon\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Project..Net Debugger">
     <configuration name=".Net Debugger" type="DotNetProject" factoryName=".NET Project" singleton="false">
       <option name="EXE_PATH" value="$PROJECT_DIR$/api/bin/Debug/net8.0/api.exe" />
@@ -127,6 +153,7 @@
       <item itemvalue=".NET Launch Settings Profile.api: https" />
       <item itemvalue=".NET Launch Settings Profile.api: IIS Express" />
       <item itemvalue=".NET Project..Net Debugger" />
+      <item itemvalue="Compound.apiPublichapp" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -147,6 +174,7 @@
       <workItem from="1719482980710" duration="2880000" />
       <workItem from="1719491523574" duration="10039000" />
       <workItem from="1719556464208" duration="5520000" />
+      <workItem from="1720445191409" duration="3310000" />
     </task>
     <servers />
   </component>
