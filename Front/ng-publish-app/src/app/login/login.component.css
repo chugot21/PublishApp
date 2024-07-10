@@ -1,0 +1,13 @@
+.space {
+    width: auto;
+    height: 10px;
+    display: inline-block;
+}
+
+.ng-valid[required]{
+    border-left: 5px solid #42A948;
+}
+
+.ng-invalid:not(form){
+    border-left: 5px solid #A94442;
+}

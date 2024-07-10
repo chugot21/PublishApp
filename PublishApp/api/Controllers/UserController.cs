@@ -42,7 +42,7 @@ public class UserController : ControllerBase
         return Ok(
             new UserDto
             {
-                Username = user.UserName,
+                username = user.UserName,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 BornDateTime = user.BornDateTime
@@ -79,20 +79,20 @@ public class UserController : ControllerBase
             return BadRequest(ModelState);
 
         //cherche dans la DB le user et le retourne avec userManager
-        var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == loginDto.Username.ToLower());
+        var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == loginDto.username.ToLower());
         if (user == null)
             return Unauthorized("Invalid username !");
 
         //on check le password avec signin manager.
-        var result = await _signinManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
+        var result = await _signinManager.CheckPasswordSignInAsync(user, loginDto.password, false);
         if (!result.Succeeded)
             return Unauthorized("username not found and/or password incorrect");
-        return Ok(
-            new NewUserDto
-            {
-                UserName = user.UserName,
-                Token = _tokenService.CreateToken(user)
-            }
+        return Ok( _tokenService.CreateToken(user)
+            // new NewUserDto
+            // {
+            //     UserName = user.UserName,
+            //     Token = _tokenService.CreateToken(user)
+            // }
         );
     }
 

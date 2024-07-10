@@ -1,19 +1,26 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {catchError, Observable, of, tap} from "rxjs";
-import { Post } from "./models/userandpost";
+import {PostCreate, PostGetAll} from "./models/PostModel";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostsService {
 
+  private apiUrl = 'http://localhost:5000/api';
+
   constructor(
       private http: HttpClient,
   ) { }
 
-  getPostList(): Observable<Post[]> {
-    return this.http.get<Post[]>(`api/Post`).pipe(
+  createPost(post: PostCreate): Observable<PostCreate> {
+    //recuperer current userId
+    return this.http.post<any>(`${this.apiUrl}/Post/`, post);
+  }
+
+  getPostList(): Observable<PostGetAll[]> {
+    return this.http.get<PostGetAll[]>(`${this.apiUrl}/Post`).pipe(
         tap((response) => this.log(response)),
         catchError((error) => this.handleError(error, []))
     );

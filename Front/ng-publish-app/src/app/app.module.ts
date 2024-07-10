@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { provideHttpClient } from "@angular/common/http";
+import {HTTP_INTERCEPTORS, provideHttpClient, withFetch} from "@angular/common/http";
 import { LoginComponent } from "./login/login.component";
 import { PostComponent } from "./post/post.component";
+import {FormsModule} from "@angular/forms";
+import { MatDialogModule } from '@angular/material/dialog';
+import {RegisterComponent} from "./register/register.component";
+import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 
 
 @NgModule({
@@ -11,7 +15,13 @@ import { PostComponent } from "./post/post.component";
     CommonModule,
     LoginComponent,
     PostComponent,
+    PageNotFoundComponent,
+    RegisterComponent,
+    FormsModule,
+    MatDialogModule,
   ],
-  providers: [provideHttpClient()]
+  providers: [
+      provideHttpClient(withFetch()),
+  ],
 })
 export class AppModule { }

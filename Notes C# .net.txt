@@ -1,0 +1,303 @@
+Racourcis clavier :
+
+prop -> definit une propriete d'une classe
+ctor -> definit constructeur
+ctrl + . -> applique l'interface a une classe
+
+Logiciels divers:
+
+Swagger :  langage de description d'interface permettant de décrire des API exprimées à l'aide de JSON
+ou Postman
+NuGet : gestionnaire de paquets de Microsoft .NET
+JetBrain : EDI
+PowerToys : Les PowerToys sont des outils proposés par Microsoft afin d'ajouter de nouvelles 
+fonctionnalités à son système d'exploitation Windows.
+
+Entity Framework : permet de creer les tables de la DB par les classes qu'on cree. Avec la classe DbContext, on transforme ces classes 
+en entites pour que ef puisse les traiter. Pour cela on utilise les classes DbSet<>.
+On utilise LINQ pour interroger DbSet qui sera converti en requete SQL.
+
+
+Pgadmin = postgresql : stack builder facilite les installations d'extensions
+
+
+VOCABULAIRE:
+
+endpoint : il y a un endpoint par route dans les controllers.
+GUI - Outils d'interface utilisateur graphique  logiciels qui aident les utilisateurs à effectuer des tâches telles que 
+la création de sites web, l'édition d'images et de vidéos ou la navigation sur le web.
+
+
+
+NOTES .NET :
+
+
+Creer un projet :
+
+- creer le dossier du projet
+- l'ouvrir avec jetbrain et taper la commande dotnet new webapi -o <nom de l'api> pour creer le projet
+Attention : ouvrir avec le fichier sln sinon on ne peut pas installer les extensions NuGet
+- Installer les extensions NuGet
+- creer les models dont nous aurons besoin pour creer la DB
+- definir le context de l'application (Data->ApplicationDBContext) defnir la DB qu'on utilise :
+builder.Services.AddDbContext<ApplicationDBContext>(options => {
+    options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase"));
+});
++
+appsettings.json -> preciser la conectionStrings a la DB :
+  "ConnectionStrings": {
+    "WebApiDatabase": "Server=localhost; Database=Publishapp; Username=postgres; Password=Premierpr0jet!; Port=5432;"
+  },
+- On fait la migration des models vers la DB : dotnet ef migrations add <name of migration> + dotnet ef database update
+- fermer l'appli de DB et redemarrer la (un refresh ne suffit pas), les tables devraient etre creees.
+
+Remarque : api.csproj est le fichier de configuration des packages installes sur l'api
+
+-Ensuite on cree les controleurs
+
+
+COMMANDES DE BASE :
+
+dotnet new
+dotnet new console -n <nom>
+dotnet build
+dotnet run 
+dotnet watch run -> ouvre Swagger pour test
+dotnet ef migrations add <Identity>
+dotnet ef database update
+
+
+FONCTIONS :
+
+_context.Stocks.Include(c => c.Comments).ToListAsync() -> vient mettre tous les comments des stocks en une list qui est renvoyee.
+_context.Stocks.Include(c => c.Comments).AsQueryable(); -> vient mettre tous les comments des stocks en type 'IQueryable<Stock>', 
+    cad en requetes SQL qui s'executeront seulement si les donnees sont reellement necessaires.
+
+Differences IEnumerable<T> et IQueryable<T> : 
+    - IEnumerable<T> : les operations LINQ sont executees immediatement en filtrant avec Where par exemple. 
+        Les elements seront tous telecharges puis filtres. Utilise pour les elements deja en memoire.
+    - IQueryable<T> : traduit les operations LINQ en requests SQL executees sur la DB en differees. 
+        La requete SQL est creee, on y ajoute une clause avec Where puis on recupere le resultat de la requete. 
+        Plus performant sur les elements a distance. 
+
+LINQ : LINQ (Language Integrated Query) est une fonctionnalité de C# qui permet d'écrire des requêtes pour extraire 
+    et manipuler des données de manière expressive et concise. LINQ peut être utilisé avec des collections en mémoire,
+    des bases de données, des fichiers XML, et d'autres sources de données. Les opérations LINQ sont des méthodes et 
+    des expressions qui permettent de filtrer, projeter, agréger, et transformer des données. 
+    Voici les principaux types d'opérations LINQ : Where-filtrage, select-projection(modifie les elements), OrderBy-tri...
+
+stocks.Where(s => s.CompanyName.Contains(query.CompanyName)); -> on recupere les stocks seulement s'ils ont le meme nom 
+    recupere dans le requete.
+
+query.SortBy.Equals("Symbol", StringComparison.OrdinalIgnoreCase) -> Equals compare deux chaines de caracteres.
+
+FindAsync(id) : recherche une entite par sa cle primaire (cle parent) via le cache sinon via la DB -> c'est rapide.
+FirstOrDefaultAsync() : recherche une entite par rapport a une condition specifique. Passe tjs par la DB
+
+Include() : liste des objets connexes a retourner dans les resultats de la requete.
+ThenInclude() : apres un include pour include en profondeur, deux niveaux d'entites.
+
+
+
+DATA VALIDATION
+
+- les int : directement dans les routes des controllers : [Route("{id:int}")]
+- les string : dans les fichiers Dtos :
+    [Required]
+    [MinLength(5, ErrorMessage = "Title must be 5 characters")]
+    [MaxLength(280, ErrorMessage = "Title cannot be over 280 characters")]
+- les decimal : dans les fichiers Dtos :
+    [Required]
+    [Range(1, 5000000000)]
+
+check data validation form. ModelState comes from ControllerBase. A mettre dans les fonctions des controllers.
+    if (!ModelState.IsValid)
+        return BadRequest(ModelState);
+
+
+FILTERING
+
+On creer des filtres a notre requete pour chercher par Symbol ou CompanyName ou sans filtre. On cree ces filtres grace a l'QueryObject.
+creer un dossier Helpers avec un dossier Query pour selectionner les elements qui servent de filtres.
+Puis on appelle cette objet dans notre fonction Getallasync(QueryObject query). On verifie si l'utilisateur a fait des filtres.
+On vient modifier notre IstockRepo et StockRepo pour filtrer ces deux elements a l'aide des operateurs LINQ :AsQueryable et Where.
+
+
+SORTING
+
+Dans le QueryObject, on rajoute un filtre SortBY et un filtre qui definit dans quel sens on filtre.
+Puis on rajoute une condition dans le Repository.
+if (!string.IsNullOrWhiteSpace(query.SortBy))
+    {
+        //Si l'utilisateur veut filtrer par symbol (peu importe la casse des lettres.
+        if (query.SortBy.Equals("Symbol", StringComparison.OrdinalIgnoreCase))
+        {
+            stocks = query.IsDescending ? stocks.OrderByDescending(s => s.Symbol) : stocks.OrderBy(s => s.Symbol);
+        }
+    }
+
+
+PAGINATION
+
+Dans le QueryObject on rajoute PageNumber et PageSize pour savoir quelle page on affiche et le nombre d'objet affiche.
+puis dans le repo, on definit le nombre d'objet par page a Skip.
+var skipNumber = (query.PageNumber - 1) * query.PageSize;
+    return await stocks.Skip(skipNumber).Take(query.PageSize).ToListAsync();
+
+
+IDENTITY
+
+* Install Identity :
+
+On cree un modele AppUser -> on relie automatiquement ce modele a la DB via IdentityDbContext<AppUser> dans Data.ApplicationDBContext.
+Program.cs -> on definit tout par rapport au frameworkentity : Addidentity et Addauthentification avec JWT.
+appsettings.json -> on ajoute les adresse de communication avec le server et les users ainsi que la cle privee
+"JWT":{
+    "Issuer": "http://localhost:5246", //the server
+    "Audience": "http://localhost:5246",//user who use the app
+    "SigningKey": "swordfish"
+}
+
+program.cs -> On complete les options parametres JWT avec des trois donnees en plus.
+Puis on ajoute dans l'app l'utilisation des authorisations et authentifications.
+
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequiredLength = 12;
+}).AddEntityFrameworkStores<ApplicationDBContext>();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme =
+    options.DefaultChallengeScheme = 
+    options.DefaultForbidScheme =
+    options.DefaultScheme =
+    options.DefaultSignInScheme = 
+    options.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
+
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidIssuer = builder.Configuration["JWT:Issuer"],
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["JWT:Audience"],
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(
+            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"])
+        )
+    };
+});
+
+builder.Services.AddScoped<ITokenService, TokenService>();
+...
+app.UseAuthentication();
+app.UseAuthorization();
+
+Puis on migre les nouvelles donnees dans la DB : dotnet ef migration add <nom> + dotnet ef database update
+
+* Register des users :
+
+-> On register les users en creant des roles.
+On cree le controller, le modele et le dto.
+Data->ApplicationDBContext -> On cree les roles grace a EF.
+
+* Token Service :
+
+ITokenService +
+Service->Token -> On cree le Service Token qui herite de l'interface token. Un service est different d'un Repository. 
+Un repo est fait pour les appels DB. Un service peut etre n'importe quoi d'autre.
+Le service Token est instancie avec la config IConfiguration.
+On cree une cle symetrique JWT a partir de la SigningKey definit dans appsettings.json.
+Ensuite on appelle la methode createToken().
+
+Puis on cree un Dto pour renvoyer l'user, email et le token dans AccountController.
+
+* login :
+
+On va utiliser User manager pour find user 
++ Signin manager pour check password
+AccountController -> creation d'un efonction Login et on integre signinmanager
++ LoginDto -> on cree donc un dto en fonction.
+
+WARNING : Pour se connecter on se logue puis on recupere le token pour le rentrer dans "Authorize" et 
+ensuite on peut utiliser les autres routes.
+
+
+
+MANY TO MANY 
+
+Quand un user va avoir un portfolio de stocks mais que les stocks peuvent avoir plusieurs users aussi.
+Il est recommande de faire une join table qui stockera les id users et les idstock.
+Models -> portfolio : on stocke les id et un stock et user.
+Models -> AppUSer : on ajoute une liste de portfolio
+Models -> Stock : on ajoute une list de portfolio
+Data -> ApplicationDBContext : on rajoute la foreignKey de la table portfolio et on relie la cle aux deux tables user et stock
+    + on rajoute ca : public DbSet<Portfolio> Portfolios { get; set; }
+On doit supprimer les migrations pour reconfigurer tout en many to many.
+pour on refait une migration de la DB avec les commandes dotnet ef migration add <name> et dotnet ef database migration
+
+
+* Implementer les methodes du modele Portfolio:
+
+
+GET :
+
+extension->Claimsextension -> On cree une fonction qui recupere le username via les claims qui ont ete crees via les tokens (service).
+Portfolio controller -> On le cree pour avoir une fonction qui recupere le portfolio du user. Pour cela, on utilise les claims pour recuperer l'utilisateur ainsi que les stocks associes.
+IPotfolioRepository + PortfolioRepository -> on cree une fonction qui vient telecharger de la DB uniquement les stock lie a l'user en question grace a la focntion select.
+Program.cs -> rajouter cette ligne : builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
+
+CREATE :
+
+Portfoliocontrolelr -> on cree la fonction AddPortfolio(). on get the user + get the stock
+IStockRepository -> on rajoute Task<Stock?> GetBySymbolAsync(string symbol);
+StockRepository -> on definit cette fonction.
+PortfolioController -> On check si stock existe + s'il n'est pas deja dans le portfolio
+IPortfolio + PortfolioRepository -> cree la fonction CreateAsync qui create object portfolio + save in DB
+PortfolioController -> cree le portfoliomodel qui sera cree dans CreateAsync et check si fonctionne
+
+DELETE:
+
+Portfoliocontrolelr -> get the user(identity claims extension) + get the portfolio + filter 
+IPortfolio + Portfoliorepo -> on cree la focntion deleteportfolio.
+
+
+
+ONE TO ONE
+
+Contrairement a un one to many qui contient un tableau (List) dans chacun des deux objets, 
+un one to one contient un objet dans son objet. C'est a dire qu'il suffit juste de rajouter
+dans les methodes du Comment l'id du user et son objet.
+Puis de rajouter les include et Theninclude dans 
+CommentController -> create() : relier l'user au comment 
+    var username = User.GetUsername();
+        var appUser = await _userManager.FindByNameAsync(username);
+        
+        var commentModel = commentDto.ToCommentFromCreate(stockId);
+        commentModel.AppUserId = appUser.Id;
+
+CommentRepository -> include(s => a.AppUser) dans les focntions Get.
+StockRepository -> ThenInclude(a => a.AppUser) dans la fonction getAllAsync + FirstOrDefaultAsync(i => i.Id == id)
+a la place de FindAsync() dans GetByIdAsync afin de recuperer les comments en profondeur.
+CommentDto -> on rajoute le nom du user uniquement avec l'attribut CreatedBy
+CommentMapper -> idem pour que le front recupere le nom dans ToCommentDto : CreatedBy
+StockController -> on retourne le stockDto dans la fonction GetAll
+
+
+DEBUGGER RIDER
+
+F9 pour poser un breakpoint
+Sauter une ligne -> deplacer la fleche jaune
+fleche verte -> continuer l'execution
+F10 -> passer a l'execution suivante
+F11 -> rentrer dans les fonctions
+On peut traquer un objet ou autre en cliquant sur les elements et en les epinglants
+
+
+

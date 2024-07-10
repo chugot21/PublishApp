@@ -35,3 +35,28 @@ Pages :
 A eclaircir :
 - claims
 - roles user
+
+port 5173 back 
+port 4200 front
+
+
+A faire:
+
+- recuperer current userId posts.service.ts
+- pattern title et content pour rajouter .?!...
+
+- faire afficher le modal au dessus du reste
+- limiter le nombre de modal a afficher (griser le fond)
+- barre de recherche /Post par post ou user.
+- bouton de deconnexion
+- bouton pour modifier profil
+- voir ssl https
+- [bonus] rajouter photo profil
+
+
+A peaufiner:
+- register -> fenetre a centrer voir par rapport a materialize et les classes Matdialog
+- register -> voir pour condition mdp, pattern si echoue dans onSubmit() afficher message user ou message erreur et rester sur la fenetre.
+- new-post -> idem pour onSubmit conditions
+- post.componenet -> voir pour rajouter logo bouton new post materialize.
+- reorganiser dossier

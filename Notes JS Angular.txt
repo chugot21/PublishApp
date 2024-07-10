@@ -1,0 +1,521 @@
+JS
+
+String 
+.push -> creer la strign ou array 
+.length -> on peut reduire la longueur de la string meme s'il y a des elements dedans
+delete names[1] si au milieu la taille ne change pas car valeur juste remplacee par null.
+names.splice(1,1) -> supprime l'element avec l'espace vide.
+.pop() -> remove last element
+.shift() -> remopve first element.
+Array.isArray(names) -> verifie si names est un array.
+.unshift() -> rajoute un element au debut.
+.slice() -> cree un sub array
+.splice() -> remplace ou remove un element.
+On peut echanger les valeurs d'un tableau car chaque valeur est liee a sa position dans le tableau.
+.sort() -> trie le tableau mais attention quand c'est des nombres, trie sous forme de char donc 10 < 2
+.reverse() -> inverse l'ordre du tableau.
+.map() -> applique une fonction a chaque element
+.filter()
+.reduce()
+
+
+
+
+Les classes
+
+Creation d'une classe:
+const x = 1;
+const y = 2;
+const obj = {
+  x,
+  y,
+  calcSum(a, b) {
+    return a + b;
+  },
+};
+
+obj.hasOwnProperty(<propriete>); -> check si la propriete existe.
+
+Parcours les variables de obj dans l'ordre d'insertion. Mais differe parfois, si on veut un ordre precis, ne pas l'utiliser.
+for(let key in <obj>)
+{
+    if (!obj.hasOwnProperty(key)) //check les elements vides.
+        continue;
+}
+
+
+const obj = {
+  name: 'Ali',
+  age: 65,
+};
+Object.keys(obj);
+// => [ 'name', 'age' ]
+Object.values(obj);
+// => [ 'Ali', 65 ]
+Object.entries(obj);
+// => [ [ 'name', 'Ali' ], [ 'age', 65 ] ]
+
+On peut creer un obj vide avec Object.create(null);
+
+
+Convertion:
+
+Boolean()
+Number()
+String()
+JSON.stringify(<obj>) -> convertir tous les elements d'obj en string.
+JSON.parse(<obj>) -> convertir pour revenir a l'etat initial
+
+Chaine de modele et operateur ternaire:
+const grade = 95;
+`You have ${grade > 90 ? 'passed' : 'failed'} the exam.`;
+// => You have passed the exam.
+
+
+Fonctions:
+function nom(parametre){}
+Une fonction peut etre appelee avec plus ou moins du nombre de parametres necessaire. Les parametres en moins seront null.
+On peut return un obj ou tableau pour renvoyer plus d'infos.
+function divide(a, b) {
+  return {
+    quotient: Math.floor(a / b),
+    remainder: a % b,
+  };
+}
+
+var definit une variable d'une portee fonctionnelle donc portee large.
+let et const a portee de bloc -> portee resteinte.
+
+
+Element Rest:
+ne peut pas avoir de virgule derriere. Fais un tableau des elements qu'il reste. En parametre, il prend un nbr indefini d'elements.
+const [a, b, ...everythingElse] = [0, 1, 1, 2, 3, 5, 8];
+a;
+// => 0
+b;
+// => 1
+everythingElse;
+// => [1, 2, 3, 5, 8]
+
+Element spread:
+Idem Rest mais peut etre partout dans la liste d'elements.
+
+
+
+CALLBACK:
+
+Fonctions tranmises en tant qu'arguments a d'autres fonctions
+
+[1, 2, 3].forEach(function (element) {
+  doSomething(element);
+});
+// => doSomething() is invoked 3 times, once with each element
+
+Array.prototype.map -> renvoie nv tableau
+Array.prototype.reduce 
+
+array.every((item) => item >= 0);
+array.some(condition);
+array.IndexOf(item);
+array.findIndex(item);
+array.includes(item);
+
+for(const <element> of <array>) {}          <---- for ...of
+for (const property in object) {            <---- for ...in -> sur les cles-valeur d'un objet
+    console.log(`${property}: ${object[property]}`);
+}
+
+const numbers = [6.0221515, 10, 23];
+function callback(number, index, fullArray) {
+  console.log(number, index, fullArray);
+}
+numbers.forEach(callback);                  <---- foreach() a eviter car ne return rien, on ne peut pas la break ni continue
+
+
+FONCTIONS FLECHEES
+
+Les fonctions flechees ne definissent pas un nouveau context, on peut donc definir une fonction flechee dans 
+les methodes d'une classe pour pouvoir utiliser this qui designera tjs la class principale et non la classe utilisee pour creer la methode.
+function addUpTwoNumbers(num1, num2) {
+  return num1 + num2;
+}
+// function implicite flechee
+const addUpTwoNumbers = (num1, num2) => ({num1 + num2});
+
+
+
+EXPRESSIONS REGULIERES - RegEx
+
+Expression reguliere litteral : /pattern/flags -> mieux a utiliser car compile une fois lors de l'analyse.
+const regex = /[a-z]/;
+Les flags sont /g - recherche globale, /i - insensible a la casse, /m - recherche multiligne.
+Constructeur Regex : compile a chaque nouvel Object
+const regex = new RegExp('[a-z]');
+
+regex.test(<element a chercher>);
+<element dans lequel on cherche>.match(regex);
+str.replace(<element>, <element remplacant>);
+
+const str = 'hello,user.how are.you';
+const result = str.split(/[,.\s]/);
+console.log(result);
+// => ['hello', 'user', 'how', 'are', 'you']
+
+
+
+HERITAGE
+
+class Pet {
+  constructor(name) {
+    this.name = name;
+  }
+
+  introduce() {
+    console.log(`This is my pet, ${this.name}.`);
+  }
+}
+class Dog extends Pet {}
+const dog = new Dog('Otis');
+dog.introduce();
+// => This is my pet, Otis.
+
+Pour definir un constructeur dans la classe enfant, il faut d'abord appeler celui de la classe parent avec le mot-cle super:
+class Pet {
+  constructor(name) {
+    this.name = name;
+  }
+}
+class Dog extends Pet {
+  constructor(name, breed) {
+    super(name);                            <----- doit etre appele avant this
+    this.breed = breed;
+  }
+}
+const dog = new Dog('Otis', 'Pug');
+
+
+
+ERRORS
+
+class CustomError extends Error {}          <---- herite de la classe error
+try {
+  // ... Code that may throw an error
+} catch (error) {
+  if (error instanceof CustomError) {               <---- check si l'erreur est une instance d'une erreur particuliere.
+    console.log('The error thrown is an instance of the CustomError');
+  }
+}
+
+Creer sa propre classe d'erreur:
+class MyCustomError extends Error {}
+
+
+PROMESSES
+
+Etats : pending - en attente, fulfilled - accompli, rejected
+
+Si l'etat passe comme fulfilled ou rejected alors la fonction de rappel associee a la promesse est appelee via la methode then().
+const promise1 = new Promise(function (resolve, reject) {
+  resolve('Success!');
+});
+promise1.then(function (value) {
+  console.log(value);
+  // expected output: "Success!"
+});
+la methode then prend en premier argument la fonction qui sera executee si c'est resolu, en deuxieme une fonction si c'est rejete.
+
+.catch(function (error) {});
+
+function findDataById(id) {
+  return new Promise(function (resolve, reject) {
+    let sampleData = [1, 2, 3, 4, 5];
+    if (sampleData[id]) {
+      resolve(sampleData[id]);              <----  renvoie un objet Promise qui est résolu avec une valeur donnée
+    } else {
+      reject(new Error('Invalid id'));      <----  renvoie un objet Promise qui est rejeté avec une raison donnée
+    }
+  });
+}
+findDataById(4)
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (err) {                   <---- si la promesse echoue.
+    console.error(err);
+  })
+  .finally(function () {                    <---- s'affiche quoi qu'il arrive
+    console.log('Promise completed');
+  });
+
+  Fonction promise.all(); <--- prend un itérable de promesses en entrée et renvoie une seule promesse 
+                                qui se résout en un tableau des résultats des promesses d'entrée.
+
+
+
+SETS - ensemble
+
+type list. Il ne peut y avoir des donnees identiques dedans. On peut les convertir en tableau ou convertir un tableau en set
+const arrayWithDuplicates = [7, 3, 3, 9, 3];
+const arrayWithoutDuplicates = [...new Set(arrayWithDuplicates)]; // [7, 3, 9]
+const anotherArrayWithoutDuplicates = Array.from(new Set(arrayWithDuplicates)); // [7, 3, 9]
+Set.keys() et Set.values() sont identiques.
+
+
+
+
+
+
+
+Caniuse -> site pour voir les compatibilites des fonctions JS.
+
+console.log(this ou window); toutes les variables globales sont dans l'objet window.
+window.prompt() -> demande une info a l'utilisateur
+alert() -> afficher message erreur
+
+JS sous forme de module des le debut.
+
+
+
+ANGULAR 
+
+est ce qu'il aurait developpe la meme chose
+differentes solutions - recherche
+justifier ligne de code par ligne de code pourquoi comme ca
+
+https://www.youtube.com/watch?v=DTIYVffhJuU
+
+ES6 - fonctionnalites nouvelles et pratiques
+
+ES6 = EcmaScript 6. Derniere version de JS.
+transpilateur = traduire code ES6 en ES5
+Permet d'utiliser des clase en JS sans passer par les prototypes.
+Permet de faire de l'heritage sans utiliser call et create(). On utilise extends et super.
+let permet de ne pas polluer le contexte global d'une fonction. 
+Permet de creer des templates de strings -> on utilise `` au lieu de '' et l'on peut ecrire sur pls lignes et integrer 
+des variables avec ${variable}.
+
+
+TYPESCRIPT 
+
+Interets:
+type generique -> mettre un type qui sera detecte et reutilise a pls endroits.
+Systeme d'union et d'intersection 
+On peut faire des interfaces.
+Definir les options de typescript dans tsconfig.json
+
+
+Angular oriente composant - morceau code html et class JS.
+Construit sur typescript, sur la derniere version de JS : ES6 (egma script) et sur le standards des composants web 
+(encapsule hmtl, css et JS).
+
+
+
+DEBUT PROJET
+
+creer un projet :
+> ng new <nom de l'app> --minimal --style=css
+> taper Yes
+
+rajouter a tsconfig.json : "strictPropertyInitialization": false,
+rajouter a index.html : <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> 
+c'est le lien a la librairie materialize.
+
+package : Angular CLI.
+>  ng serve                <----- permet de lancer l'application
+  ng build
+  ng help.
+
+assets -> photos
+` = backtic permet de concatener les chaines de caracteres
+
+Composant :
+= classe + vue(dans le composant c'est la categorie "template")
+app.module.ts regroupe les composants d'un meme type.
+a chaque composant -> app.component.html.
+Pour creeer un composant :
+> ng generate component <nom> --inline-template=false (l'option sert a separer en deux fichiers)
+ngChanges
+ngOnInit
+ngDoCheck
+ngAfterViewInit
+ngOnDestroy
+Il est deconseiller de faire appel a un constructeur.
+
+Vue - html - template:
+- interpolation : {{ variable }} : composant vers template sans action.
+- evenement : <p (click)="selectPokemon(pokemonList[0])">{{ pokemonList[0].name }}</p> : template vers composant.
+
+dans les composants, on peut mettre un attribut "styleUrls" qui permet de faire un css qui change en fonction de l'utilisation du user. 
+(message d'erreur)
+
+pseudo evenement : 
+interaction de l'utilisateur avec la page.
+- ngIf : vient recuperer un attribut de la class pour faire une condition d'affichage.
+- ngFor : vient recuperer un attribut et lui appliquer une modif.
+Dans index.html -> rajouter le lien avec Materialize qui est une bibliotheque de fonction css
+
+Directive :
+permet d'interagir avec un element d'une page. Il peut y avoir pls directive par element.
+- composant
+- directives d'attributs
+- directives structurelles : ngif ou ngfor
+
+Pipes :
+Les formats se font a partir de pipes apres la creation des elements. On peut utiliser pls pipes sur un element.
+On peut cree nos pipes personnalises :
+> ng generate pipe <nom>
+
+
+Creer d'autres composants :
+A chaque modification penser a modifier app.modules.ts pour import tous les fichiers. 
+
+Les routes:
+On rajoute les path dans le fichier app.routes.ts
+On met une route principale en bas. 
+En haut on met les routes specifiques et en bas la plus globale.
+On rajoute <router-outlet></router-outlet> dans le fichier app.component.html pour relier l'url au template.
+Pour la page d'erreur, il faut mettre la route en dernier. 
+  { path: '**', component: PageNotFoundComponent }
+gestion des paths peut se faire de deux facons : 
+- uniquement via routerLink="/pokemons" dans le fichier html 
+- ou via une fonction dans le fichier ts :
+  goToPokemon(pokemon: Pokemon){
+        this.router.navigate(['/pokemons', pokemon.id]);
+  }
+  + appel de la fonction dans le fichier html <div (click)="goToPokemon(pokemon)"
+
+!!!     Il faut faire attention a l'ordre des routes dans les modules. tjs aller de la plus precise en haut a la plus large en bas  !!!
+- utiliser la methode forRoot(routes) pour la class mere et forChild() pour les modules fils.
+
+
+Les modules:
+chaque app a un module racine (app.module.ts) mais peut en avoir plusieurs. Dedans il y a :
+- les declarations : les classes de vues (composant, directives et pipes)
+- exports : sous ensemble des declarations
+- Imports : declaration propre au module.
+- Providers : services de dependance
+- Bootstrap : composant pour le module racine.
+Creer un module :
+> ng generate module <nom> --dry-run (l'option est pour voir si ca s'executera bien, il faut l'enlever si on veut vraiment la lancer)
+
+Les services:
+> ng generate service <nom>
+Decorateur @Injectable -> permet d'utiliser ce service ailleurs . Est deja compris dans le composants par exemple.
+L'interet des services est que tout le code prend les attributs dedans donc s'il y a un changement, c'est plus pratique.
+Pour injecter un service, on l'injecte a chqaue module dans providers. Il ne vaut mieux pas le faire dans les composants.
+
+Les formulaires:
+- Forms moduls : petit formulaire
+- Reactive forms module : oriente composants
+Directives a utiliser :
+- ngForm : cree une instance du formulaire -> permet de valider ou non le formulaire. - formulaire au niveau global
+- ngModel : s'applique sur chaque champ du formulaire. cree un FormControl, peut cree des sous formes de champ. 
+gere les interactions user. - champ du formulaire. Savoir si coche ou non.
+
+Pour recuperer l'info que l'utilisateur a saisi, on utilise 
+  @Input() 
+parmi les attributs. Ce qui nous donnera acces a la classe donnee.
+Pour savoir si l'utilisateur a coche une case ou savoir ce qu'il a selectionne, on rentre en argument de la fonction :
+  $event: Event, type: string
+
+
+HTML - explication :
+<form *ngIf="pokemon" (ngSubmit)="onSubmit()" #pokemonForm="ngForm">
+quand l'utilisateur soumet le formulaire, cela lance la fonction onSubmit.
+le formulaire sera stocke directement dans une variable dans le template nomme "pokemonForm"
+
+les balises [] dans un fichier html signifie qu'on passe des donnees de la classe au template. - property enbinding
+les balises () dans un fichier html signifie qu'on passe des donnees du template a la classe .ts - liaison d'evenement.
+
+Restriction de saisie - validation - attribut HTML5 :
+required
+pattern="^[a-zA-Z0-9àéèç]{1,25}$"
+on autorise des lettre en majuscule et minuscules, des caracteres avec des accents et de 1 a 25 caracteres.
+
+
+La programmation reactive - promesses :
+
+rxmarbles.com -> site avec les fonctions qui traite les flux.
+Librairie RxJS
+les flux : click, requetes
+La programmation est un flux de donnees asynchrone = observable - sujet observe.
+ecouteur d'evenement = observeur
+on s'abonne a un flux.
+Observable vs promesse : gere les valeurs asynchrones. on peut convertir un observable en promesse.
+- Observable : peut recevoir pls evenements. attend l'appel a subscribe pour etre execute. ideal pour des flux de donnees
+- promesse : ne change d'etat qu'une fois. s'execute de suite. Ideal pour un appel de fonction asynchrone qui renvoie une valeur unique.
+
+HTTP : requetes vers serveur distant
+HttpClientModule ->existe deja dans angular
+On peut simuler une DB avec angular en utilisant les commande ci-dessous:
+>  ng update @angular/cli @angular/core --allow-dirty       <--- met a jour angular
+>  npm install angular-in-memory-web-api --save-dev
+>  ng generate service in-memory-data
+
+on doit rajouter les appels reseau dans les services. pour cela on utilise la classe HttpClient. Exemple :
+constructor(
+      private http: HttpClient,
+  ) {}
+
+  getPokemonList(): Observable<Pokemon[]> {
+    return this.http.get<Pokemon[]>('api/pokemons').pipe(
+        tap((pokemonList) => console.table(pokemonList)), //tap console log des observateurs
+        catchError((error) => {
+          console.log(error);
+          return of([]); //tableau vide.
+        })
+    );
+  }
+
+  Ensuite il faut adapter les composants dans leur fonction ngOnInit. Le composant appelle la focntion du service pour faire le travasi.
+ ngOnInit()
+  {
+    this.pokemonService.getPokemonList()                            <--- on recupere lobservable depuis le service
+        .subscribe(pokemonList => this.pokemonList = pokemonList);  <--- on recupere la pokemonlist et on le pousse dans le composant.
+  }
+
+  subscribe() permet de communiquer avec l'observable.
+
+
+
+!!!!!!! Probleme sur pokemon.service.ts -> getpokemonList() -> catch l'erreur, probleme de JSON pour recuperer la list.
+
+
+
+Autocompletion - Librairie RxJS - programmation reactive:
+
+Creer un champ de recherche.
+classe Subject -> flux de donnees avec les recherches de l'utilisateur. Enregistre ce que tape l'utilisateur.
+on utilise .next pour push dans le flux de donnees ce que l'utilisateur vient d'ecrire.
+
+*ngFor="let pokemon of pokemons$ | async" -> le $ permet de faire comme this.pokemons$.subscribe(pokemons => this.pokemons = pokemons)
+debounceTime(300) -> permet d'attendre avant de faire un appel serveur.
+distinctUntilChanged(), -> attendre qu'il y ai un changement dans les termes de recherche.
+switchMap((term) => this.pokemonService.searchPokemonList(term)) -> retourne une liste de pokemon
+
+
+Guards - type de route:
+
+permet de verifier des conditions pour empecher des connexions.Permet de rediriger la navigation. retourne un boolean. 
+> ng generate guard <nom>
+> type CanActivate
+
+On le rajoute dans la route a checker.
+
+
+Deployer l'app:
+
+- compiler tous les fichiers TS en css/html 
+- compresser les fichiers sur le navigateur.
+- ng build -> permet de passer en mode production.
+
+
+Relier front et back:
+
+- Dans le front, creer les models correspondant aux Dto du back.
+- configurer HttpClientproviders dans app.config.ts
+- creer un composant
+- rajouter les elements lies au CORS (Le partage des ressources entre origines multiples (CORS) est un mécanisme 
+d'intégration des applications. La spécification CORS permet aux applications Web clientes 
+chargées dans un domaine particulier d'interagir avec les ressources d'un autre domaine.) dans le back program.cs et dans le front angular.json.
+- pour les routes dans le front, mettre l'adresse exacte des apis du back

@@ -1,0 +1,102 @@
+
+
+SQL
+
+
+
+
+Cle primaire : attribut qui identifie chaque ligne de la table.
+cle etrangere : attribut d'une relation qui apparait comme cle primaire d'une autre relation.
+
+SELECT * FROM <nom de table>;
+SELECT * FROM <table> ORDER BY <attribut>, <deuxieme attribut>;
+                        ORDER BY <attribut> DESC;
+                        LIMIT 3; limite le nbr de lignes
+
+
+Restrictions
+
+SELECT * FROM <table> WHERE <condition;
+                            Fonction = "Representant" AND NoEmp < 8;
+                            Fonction <> "Representant"; -> different de
+                            UPPER(Ville) = "SEATTLE"; -> pour les chaines de caracteres
+                            LOWER(Ville) = "seattle";
+                            Region IS NULL;
+                            NoEmp BETWEEN 3 AND 8;
+                            TitreCourtoisie
+
+On peut creer des alias des tables avec 
+SELECT e.id AS id_entity,
+        e.name AS nom_societe;
+FROM entity e, addres a;
+
+
+JOINTURE : produit cartesien + filtrage
+
+
+condition de jointure pour relier deux tables via leur cles etrangeres et primaires
+FROM entity e
+WHERE e.id_addresse = a.id_address  OU  JOIN address a ON e.id_address = a.id_address;
+
+Jointure pls a pls via une table d'association:
+
+On fait une double condition pour les id des deux tables.
+
+Jointure externe :
+LEFT JOIN ou RIGHT JOIN pour selectionner les lignes IS NULL ressortant de la jointure des id key.
+Les jointures externes totales se font avec FULL OUTER JOIN
+
+Jointure naturelle :
+NATURAL JOIN address a; -> fait la jointure tout seul mais moins precis car peut prendre d'autres colonnes qui sont identiques autres 
+que les cles.
+
+Important : check le nombre de lignes apres les jointure, voir si coherent.
+
+
+AGREGATION
+
+Regrouper des colonnes selon une condition sur une autre colonne. La cle primaire devient l'assemblage des colonnes condition.
+On utilise la commande suivante : GROUP BY [colonnes conditions]
+Attention, dans le select, il doit y avoir une coherence avec la condition d'agregation.
+
+HAVING - filtrage
+
+Condition apres agregation. Tandis que le where est avant agregation.
+
+
+LIKE - recherche par mots similaires
+
+
+UNION - concatener deux tables avec un schema similaire.
+
+SELECT "Adresse" AS type, address AS recherche, NULL AS url, id_address AS identifiant FROM address
+UNION
+SELECT "Société (entité)" AS type, name AS recherche, url AS url, id AS identifiant FROM entity
+
+
+
+MODELISATION DES DB - 
+
+On utilise un Systeme de Gestion de Bases de Donnees (SGBD), cad un programme qui fait l'intermediaire 
+entre le programme et la DB a l'aide d'un langage comme SQL.
+
+Big Data : 3V Volume, Velocite et Variete
+
+- Donnees structurees : representees sous forme d'un fichier CSV (comma separated value). Les fichiers CSV respectent une norme, l'encoding.
+Elle transforme les caracteres en version "informatique". Il existent 3 grandes normes d'encoding : ASCII, Latin-1 et UTF-8.
+- Donnees peu structurees (difficile a representer sous forme de tableau comme les images, videos, mails...).
+On represente les donnees non structurees par des paires cle-valeurs comme dans les fichiers json (Javascript Object Notation).
+
+La DB relationnelle est la plus utilisee pour stocker les donnees structurees (SGBDR). Exemple : PostgreSQL, MySQL, Oracle, SQLite.
+
+Le SGBD NoSQL sont utilisees pour les donnees non structurees. Exemple : Elasticsearch, Neo4j, MongoDB.
+
+Etapes de creation :
+
+- Construire le MCD Modele conceptuel de donnees avec la methode MERISE (ou entite-association) ou UML (ou diagrammme de classes).
+- MLD - Modele Logique de Donnees : modele relationnel
+- MPD - Modele Physique de Donnees : Langage de Definition des Donnees. SQL
+
+Il faut faire attention aux redondances car elles crees des incoherences. Du coup, on cree plusieurs tableaux au lieu d'un 
+-> Modeles de classes.
+
