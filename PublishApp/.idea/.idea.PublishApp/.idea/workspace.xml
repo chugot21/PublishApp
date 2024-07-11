@@ -10,26 +10,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="359cb3d2-7908-440b-80b9-8b575ad7f481" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/app.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/auth.guard.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/auth.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/login/login.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/login/login.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/models/userandpost.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/post/post.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/post/post.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/posts.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/user.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/auth.interceptor.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/search-posts-by-user/search-posts-by-user.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/search-posts-by-user/search-posts-by-user.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/storage.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front/ng-publish-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Front/ng-publish-app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front/ng-publish-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Front/ng-publish-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/app.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/models/UserModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/models/UserModel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/new-post/new-post.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/new-post/new-post.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/new-post/new-post.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/new-post/new-post.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/post/post.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/post/post.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/posts.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Front/ng-publish-app/src/app/posts.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Notes JS Angular.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Notes JS Angular.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Notes.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PublishApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PublishApp/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Controllers/PostController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Controllers/PostController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Dtos/User/NewUserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Dtos/User/NewUserDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Dtos/User/UserPostsDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/Dtos/User/UserPostsDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/bin/Debug/net8.0/api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/api/bin/Debug/net8.0/api.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/bin/Debug/net8.0/api.exe" beforeDir="false" afterPath="$PROJECT_DIR$/api/bin/Debug/net8.0/api.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/bin/Debug/net8.0/api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/api/bin/Debug/net8.0/api.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/obj/api.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/api.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/obj/api.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/api.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.genruntimeconfig.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/Debug/net8.0/api.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/obj/Debug/net8.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/Debug/net8.0/apphost.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/obj/Debug/net8.0/ref/api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/Debug/net8.0/ref/api.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/obj/Debug/net8.0/refint/api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/Debug/net8.0/refint/api.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/rider.project.model.nuget.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/api/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +79,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     ".NET Launch Settings Profile.api: IIS Express.executor": "Debug",
-    ".NET Project..Net Debugger.executor": "Debug",
+    ".NET Project..Net Debugger.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
@@ -153,7 +168,6 @@
       <item itemvalue=".NET Launch Settings Profile.api: https" />
       <item itemvalue=".NET Launch Settings Profile.api: IIS Express" />
       <item itemvalue=".NET Project..Net Debugger" />
-      <item itemvalue="Compound.apiPublichapp" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -174,7 +188,12 @@
       <workItem from="1719482980710" duration="2880000" />
       <workItem from="1719491523574" duration="10039000" />
       <workItem from="1719556464208" duration="5520000" />
-      <workItem from="1720445191409" duration="3310000" />
+      <workItem from="1720445191409" duration="3853000" />
+      <workItem from="1720508972070" duration="13399000" />
+      <workItem from="1720595552791" duration="331000" />
+      <workItem from="1720595902093" duration="9640000" />
+      <workItem from="1720625273665" duration="1135000" />
+      <workItem from="1720682406157" duration="15898000" />
     </task>
     <servers />
   </component>

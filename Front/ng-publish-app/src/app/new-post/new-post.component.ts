@@ -38,13 +38,11 @@ export class NewPostComponent implements OnInit {
   }
 
   onSubmit() {
-    if(this.postService.createPost(this.post).subscribe())
-    {
-      //message a user a mettre
-      this.dialogRef.close();
-    } else {
-      //message erreur au user si erreur back
-    }
+    this.postService.createPost(this.post).subscribe(
+        (response) => {
+          this.dialogRef.close();
+        }
+    );
   }
 
   cancel() {

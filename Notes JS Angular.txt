@@ -1,5 +1,8 @@
 JS
 
+Logiciel :
+Prettier
+
 String 
 .push -> creer la strign ou array 
 .length -> on peut reduire la longueur de la string meme s'il y a des elements dedans

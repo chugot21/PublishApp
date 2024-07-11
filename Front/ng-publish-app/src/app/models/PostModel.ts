@@ -1,4 +1,4 @@
-export class PostGetAll {
+export class PostList {
     title: string;
     content: string;
     createdOn: Date;

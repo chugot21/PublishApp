@@ -32,9 +32,6 @@ Pages :
         -> (option) page modif profil
 
 
-A eclaircir :
-- claims
-- roles user
 
 port 5173 back 
 port 4200 front
@@ -42,15 +39,14 @@ port 4200 front
 
 A faire:
 
-- recuperer current userId posts.service.ts
-- pattern title et content pour rajouter .?!...
+- barre de recherche /Post par post ou user -> regarder pb user dans html search + pb get 
 
+- bouton de deconnexion
+- recharger la page apres ajout de post ou register pour prendre en consideration les changements db 
 - faire afficher le modal au dessus du reste
 - limiter le nombre de modal a afficher (griser le fond)
-- barre de recherche /Post par post ou user.
-- bouton de deconnexion
-- bouton pour modifier profil
 - voir ssl https
+- [bonus] bouton pour modifier profil
 - [bonus] rajouter photo profil
 
 
@@ -60,3 +56,13 @@ A peaufiner:
 - new-post -> idem pour onSubmit conditions
 - post.componenet -> voir pour rajouter logo bouton new post materialize.
 - reorganiser dossier
+
+-regarder powertoys
+
+
+
+{{variable ou class | json}} -> afficher details de la variable ou de la class
+cmd + click pour mettre pls curseurs et double click sur les mots qu'on veut modifier.
+click droit entre numero de ligne et ligne et git blam
+
+click droit ->localhistory -> show history ou show history for selection

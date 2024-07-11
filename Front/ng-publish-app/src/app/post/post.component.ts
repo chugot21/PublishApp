@@ -1,24 +1,26 @@
 import {Component, OnInit} from '@angular/core';
 import { PostsService } from "../posts.service";
-import {PostGetAll} from "../models/PostModel";
+import {PostCreate, PostList} from "../models/PostModel";
 import {Router} from "@angular/router";
 import {NgForOf} from "@angular/common";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {RegisterComponent} from "../register/register.component";
 import {FormsModule} from "@angular/forms";
 import {NewPostComponent} from "../new-post/new-post.component";
+import {SearchPostsByUserComponent} from "../search-posts-by-user/search-posts-by-user.component";
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [
-    NgForOf,
-    FormsModule,
-  ],
+    imports: [
+        NgForOf,
+        FormsModule,
+        SearchPostsByUserComponent,
+    ],
   templateUrl: './post.component.html',
 })
 export class PostComponent implements OnInit {
-  postList: PostGetAll[];
+  postList: PostList[];
 
   constructor(
       private router: Router,

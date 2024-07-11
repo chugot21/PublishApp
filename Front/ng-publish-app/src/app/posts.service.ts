@@ -1,29 +1,44 @@
-import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {catchError, Observable, of, tap} from "rxjs";
-import {PostCreate, PostGetAll} from "./models/PostModel";
+import { ChangeDetectorRef, Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { catchError, Observable, of, tap } from "rxjs";
+import { PostCreate, PostList } from "./models/PostModel";
+import { StorageService } from "./storage.service";
+import { UserPostList } from "./models/UserModel";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class PostsService {
-
-  private apiUrl = 'http://localhost:5000/api';
+  private apiUrl = "http://localhost:5000/api";
 
   constructor(
-      private http: HttpClient,
-  ) { }
+    private storage: StorageService,
+    private http: HttpClient,
+  ) {}
 
   createPost(post: PostCreate): Observable<PostCreate> {
-    //recuperer current userId
-    return this.http.post<any>(`${this.apiUrl}/Post/`, post);
+    let userId = this.storage.getData("id");
+    return this.http.post<any>(`${this.apiUrl}/Post/${userId}`, post);
   }
 
-  getPostList(): Observable<PostGetAll[]> {
-    return this.http.get<PostGetAll[]>(`${this.apiUrl}/Post`).pipe(
-        tap((response) => this.log(response)),
-        catchError((error) => this.handleError(error, []))
+  getPostList(): Observable<PostList[]> {
+    return this.http.get<PostList[]>(`${this.apiUrl}/Post`).pipe(
+      tap((response) => this.log(response)),
+      catchError((error) => this.handleError(error, [])),
     );
+  }
+
+  searchPostByUser(term: string): Observable<UserPostList[]> {
+    if (term.length <= 1) {
+      return of([]);
+    } else {
+      return this.http
+        .get<UserPostList[]>(`${this.apiUrl}/user/?username=${term}`)
+        .pipe(
+          tap((response) => this.log(response)),
+          catchError((error) => this.handleError(error, [])),
+        );
+    }
   }
 
   private handleError(error: Error, errorValue: any) {
@@ -34,5 +49,4 @@ export class PostsService {
   private log(response: any) {
     console.table(response);
   }
-
 }

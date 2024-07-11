@@ -64,9 +64,9 @@ public class UserController : ControllerBase
             new UserPostsDto
             {
                 Username = user.UserName,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                BornDateTime = user.BornDateTime,
+                // FirstName = user.FirstName,
+                // LastName = user.LastName,
+                // BornDateTime = user.BornDateTime,
                 Posts = user.Posts.Select(p => p.ToPostDtoUnderUser()).ToList()
             }
         );
@@ -87,12 +87,12 @@ public class UserController : ControllerBase
         var result = await _signinManager.CheckPasswordSignInAsync(user, loginDto.password, false);
         if (!result.Succeeded)
             return Unauthorized("username not found and/or password incorrect");
-        return Ok( _tokenService.CreateToken(user)
-            // new NewUserDto
-            // {
-            //     UserName = user.UserName,
-            //     Token = _tokenService.CreateToken(user)
-            // }
+        return Ok( //_tokenService.CreateToken(user)
+            new NewUserDto
+            {
+                Id = user.Id,
+                Token = _tokenService.CreateToken(user)
+            }
         );
     }
 
@@ -119,7 +119,7 @@ public class UserController : ControllerBase
                 return Ok(
                     new NewUserDto
                     {
-                        UserName = user.UserName,
+                        Id = user.Id,
                         Token = _tokenService.CreateToken(user)
                     });
             }

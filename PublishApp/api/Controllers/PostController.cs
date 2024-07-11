@@ -85,7 +85,7 @@ public class PostController : ControllerBase
         
         await _postRepo.CreatePostAsync(postModel);
         //_postRepo.CreatePostAsync(postModel);
-        return Ok("Post was created");
+        return Ok();
     }
 
     [HttpDelete]

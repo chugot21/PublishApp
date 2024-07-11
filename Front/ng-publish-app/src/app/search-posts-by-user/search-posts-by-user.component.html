@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col s12 m6 offset-m3">
+        <div class="card">
+            <div class="card-content">
+                <div class="input-field">
+                    <input
+                        #searchBox
+                        (keyup)="search(searchBox.value)"
+                        placeholder="Rechercher les posts d'un pseudo"
+                    />
+                    {{searchBox|json}}
+                    <div class="collection">
+                        <a class="collection-item"
+                           *ngFor="let user of userPostList$ | async">
+                                (click)="goToDetail(pokemon)"
+                        </a>
+<!--                            {{ user|json }}-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

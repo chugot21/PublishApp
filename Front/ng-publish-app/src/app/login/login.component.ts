@@ -3,9 +3,10 @@ import {AuthService} from "../auth.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, FormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
-import {UserLogin, UserRegister} from "../models/UserModel";
+import {UserLogin, UserRegister, UserStorage} from "../models/UserModel";
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {RegisterComponent} from "../register/register.component";
+import {StorageService} from "../storage.service";
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
       private authService: AuthService,
       private router: Router,
       private dialog: MatDialog,
+      private storage: StorageService,
   ) {}
 
   ngOnInit() {
@@ -34,10 +36,11 @@ export class LoginComponent implements OnInit {
   }
 
   login(user: UserLogin) {
-    this.authService.login(user).subscribe((token: string) => {
-      if (token) {
+    this.authService.login(user).subscribe((userData: UserStorage) => {
+      if (userData.token) {
         this.message = 'Vous etes connecte.';
-        localStorage.setItem('authToken', token);
+        this.storage.saveData(userData.token, userData.id);
+        //localStorage.setItem('authToken', token);
         this.router.navigate(['/Post']);
       } else {
         this.message = 'Identifiant ou mot de passe incorrect.';
