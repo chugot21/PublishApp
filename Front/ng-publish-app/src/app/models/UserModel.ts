@@ -1,24 +1,32 @@
-import {PostCreate} from "./PostModel";
+import { PostCreate, PostProfil } from "./PostModel";
 
 export class UserLogin {
-    username: string;
-    password: string;
+  username: string;
+  password: string;
 }
 
 export class UserStorage {
-    id: string;
-    token: string;
+  id: string;
+  username: string;
+  token: string;
 }
 
 export class UserRegister {
-    username: string;
-    firstname: string;
-    lastname:string;
-    borndatetime: Date;
-    password: string;
+  username: string;
+  firstname: string;
+  lastname: string;
+  borndatetime: Date;
+  password: string;
 }
 
-export class UserPostList {
-    username: string;
-    postList: PostCreate[];
+export class Username {
+  username: string;
+}
+
+export class UserProfil {
+  username: string;
+  firstName: string;
+  lastName: string;
+  bornDateTime: Date;
+  posts: PostProfil[];
 }

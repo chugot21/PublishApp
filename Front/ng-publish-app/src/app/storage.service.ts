@@ -1,20 +1,19 @@
-import { Injectable } from '@angular/core';
-import CryptoJS from 'crypto-js';
-import {Observable} from "rxjs";
+import { Injectable } from "@angular/core";
+import CryptoJS from "crypto-js";
+import { Observable } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class StorageService {
+  token: string;
 
-  token:string;
+  constructor() {}
 
-  constructor(
-  ) { }
-
-  public saveData(token: string, id: string) {
-    localStorage.setItem('id', id);
-    localStorage.setItem('token', token);
+  public saveData(token: string, id: string, username: string) {
+    localStorage.setItem("id", id);
+    localStorage.setItem("token", token);
+    localStorage.setItem("username", username);
     //localStorage.setItem(token, this.encrypt(id));
   }
   public getData(key: string): string | null {
@@ -22,8 +21,10 @@ export class StorageService {
     //let data = localStorage.getItem(token)|| "";
     //return this.decrypt(data);
   }
-  public removeData(token: string) {
-    localStorage.removeItem(token);
+  public removeData() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+    localStorage.removeItem("username");
   }
   public clearData() {
     localStorage.clear();

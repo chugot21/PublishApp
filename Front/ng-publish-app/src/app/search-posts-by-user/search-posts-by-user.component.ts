@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { UserPostList } from "../models/UserModel";
+import { UserProfil } from "../models/UserModel";
 import { PostCreate } from "../models/PostModel";
 import {
   debounceTime,
@@ -21,7 +21,7 @@ import { AsyncPipe, JsonPipe, NgForOf } from "@angular/common";
 export class SearchPostsByUserComponent implements OnInit {
   searchTerms = new Subject<string>();
   //{...pokemonList(a)...pokemonList(ab)..}
-  userPostList$: Observable<UserPostList[]>;
+  userSearch$: Observable<UserProfil[]>;
 
   constructor(
     private router: Router,
@@ -29,7 +29,7 @@ export class SearchPostsByUserComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userPostList$ = this.searchTerms.pipe(
+    this.userSearch$ = this.searchTerms.pipe(
       //{..."a"."ab"..."abz"."ab"..."abc"....}
       debounceTime(300), //permet d'attendre un temps avant de faire un appel serveur
       //{......."ab"........."ab"..."abc"....}
@@ -42,5 +42,9 @@ export class SearchPostsByUserComponent implements OnInit {
 
   search(term: string) {
     this.searchTerms.next(term);
+  }
+
+  goToUserProfil(user: UserProfil) {
+    this.router.navigate(["/user", user.username]);
   }
 }

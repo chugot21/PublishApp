@@ -1,50 +1,57 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../auth.service";
-import {Router} from "@angular/router";
-import {FormBuilder, FormGroup, FormsModule, Validators} from "@angular/forms";
-import {NgIf} from "@angular/common";
-import {UserLogin, UserRegister, UserStorage} from "../models/UserModel";
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {RegisterComponent} from "../register/register.component";
-import {StorageService} from "../storage.service";
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../auth.service";
+import { Router } from "@angular/router";
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  Validators,
+} from "@angular/forms";
+import { NgIf } from "@angular/common";
+import { UserLogin, UserRegister, UserStorage } from "../models/UserModel";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { RegisterComponent } from "../register/register.component";
+import { StorageService } from "../storage.service";
 
 @Component({
-  selector: 'app-login',
+  selector: "app-login",
   standalone: true,
-  imports: [
-    FormsModule,
-    NgIf,
-  ],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  imports: [FormsModule, NgIf],
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"],
 })
-
 export class LoginComponent implements OnInit {
-  message: string = 'Vous etes deconnecte.';
-
+  errorMessage: string = "";
   user = new UserLogin();
+  userData: UserStorage;
 
   constructor(
-      private authService: AuthService,
-      private router: Router,
-      private dialog: MatDialog,
-      private storage: StorageService,
+    private authService: AuthService,
+    private router: Router,
+    private dialog: MatDialog,
+    private storage: StorageService,
   ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
 
+  setMessage(): void {
+    if (this.userData) {
+      this.errorMessage = "";
+      this.router.navigate(["/Post"]);
+    } else {
+      this.errorMessage = "Identifiant ou mot de passe incorrect.";
+      this.router.navigate(["/user/login"]);
+    }
   }
 
   login(user: UserLogin) {
     this.authService.login(user).subscribe((userData: UserStorage) => {
+      this.userData = userData;
+      this.setMessage();
       if (userData.token) {
-        this.message = 'Vous etes connecte.';
-        this.storage.saveData(userData.token, userData.id);
-        //localStorage.setItem('authToken', token);
-        this.router.navigate(['/Post']);
-      } else {
-        this.message = 'Identifiant ou mot de passe incorrect.';
-        this.router.navigate(['/user/login']);
+        this.storage.saveData(userData.token, userData.id, userData.username);
+        this.router.navigate(["/Post"]);
+        this.authService.loggedIn.next(true);
       }
     });
   }

@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { catchError, Observable, of, tap } from "rxjs";
 import { PostCreate, PostList } from "./models/PostModel";
 import { StorageService } from "./storage.service";
-import { UserPostList } from "./models/UserModel";
+import { UserProfil } from "./models/UserModel";
 
 @Injectable({
   providedIn: "root",
@@ -28,12 +28,12 @@ export class PostsService {
     );
   }
 
-  searchPostByUser(term: string): Observable<UserPostList[]> {
+  searchPostByUser(term: string): Observable<UserProfil[]> {
     if (term.length <= 1) {
       return of([]);
     } else {
       return this.http
-        .get<UserPostList[]>(`${this.apiUrl}/user/?username=${term}`)
+        .get<UserProfil[]>(`${this.apiUrl}/user/?username=${term}`)
         .pipe(
           tap((response) => this.log(response)),
           catchError((error) => this.handleError(error, [])),

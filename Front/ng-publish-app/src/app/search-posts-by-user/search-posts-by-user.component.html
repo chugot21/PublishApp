@@ -6,15 +6,15 @@
                     <input
                         #searchBox
                         (keyup)="search(searchBox.value)"
-                        placeholder="Rechercher les posts d'un pseudo"
+                        placeholder="Rechercher un utilisateur (saisir un pseudo)"
                     />
-                    {{searchBox|json}}
                     <div class="collection">
                         <a class="collection-item"
-                           *ngFor="let user of userPostList$ | async">
-                                (click)="goToDetail(pokemon)"
+                           *ngFor="let user of userSearch$ | async"
+                                (click)="goToUserProfil(user)">
                         </a>
-<!--                            {{ user|json }}-->
+<!--                        test-->
+<!--                            {{ user }}-->
                     </div>
                 </div>
             </div>

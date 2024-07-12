@@ -3,7 +3,7 @@
         <div class="card hoverable">
             <div class="card-content center">
                 <span class="card-title">Page de connexion</span>
-                <p><em>{{message}}</em></p>
+                <p *ngIf="errorMessage" class="error-message"><em><strong>{{errorMessage}}</strong></em></p>
             </div>
             <form #loginForm="ngForm">
                 <div>
@@ -16,7 +16,7 @@
                 </div>
             </form>
             <div class="card-action center">
-                <a (click)="login(user)" class="waves-effect waves-light btn">Se connecter</a>
+                <a (click)="login(user)" class="waves-effect waves-light btn">Log In</a>
                 <a class="space"></a>
                 <a (click)="registerDialog()" class="waves-effect waves-light btn">Register</a>
             </div>

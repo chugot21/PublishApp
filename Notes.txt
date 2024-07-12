@@ -39,22 +39,27 @@ port 4200 front
 
 A faire:
 
+-> creation d'une fonction pour recuperer tous les usernames pour le composant search-posts-by-user 
+pour avoir la liste des usernames pour la recherche. Apres redicrection vers userprofilcomponent
 - barre de recherche /Post par post ou user -> regarder pb user dans html search + pb get 
 
-- bouton de deconnexion
-- recharger la page apres ajout de post ou register pour prendre en consideration les changements db 
-- faire afficher le modal au dessus du reste
-- limiter le nombre de modal a afficher (griser le fond)
 - voir ssl https
+- recharger la page apres ajout de post ou register pour prendre en consideration les changements db 
+- faire afficher le modal au dessus du reste z index ?
+- limiter le nombre de modal a afficher (griser le fond)
 - [bonus] bouton pour modifier profil
 - [bonus] rajouter photo profil
 
 
 A peaufiner:
+- erreur localstorage avant login car le token n'a pas encore ete cree. auth.interceptor le recherche avant sa creation.
 - register -> fenetre a centrer voir par rapport a materialize et les classes Matdialog
 - register -> voir pour condition mdp, pattern si echoue dans onSubmit() afficher message user ou message erreur et rester sur la fenetre.
 - new-post -> idem pour onSubmit conditions
+
+- encrypt les infos dans le localstorage
 - post.componenet -> voir pour rajouter logo bouton new post materialize.
+- guard ?
 - reorganiser dossier
 
 -regarder powertoys
@@ -64,5 +69,4 @@ A peaufiner:
 {{variable ou class | json}} -> afficher details de la variable ou de la class
 cmd + click pour mettre pls curseurs et double click sur les mots qu'on veut modifier.
 click droit entre numero de ligne et ligne et git blam
-
 click droit ->localhistory -> show history ou show history for selection

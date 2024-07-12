@@ -39,7 +39,8 @@ public class PostController : ControllerBase
         
         var posts = await _postRepo.GetAllAsync(query);
         
-        var postDto = posts.Select(p => p.ToPostDto()).ToList();
+        var postDto = posts.Select(p => p.ToPostDto())
+                                        .OrderByDescending(p => p.CreatedOn).ToList();
         
         return Ok(postDto);
     }

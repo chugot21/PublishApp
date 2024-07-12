@@ -6,7 +6,7 @@
             <div class="section">
                 <h6><strong>{{ post.title }}</strong></h6>
                 <p> {{ post.content }}</p>
-                <p class="right"> {{ post.createdOn }}</p>
+                <p class="right"> {{ post.createdOn | date:"dd/MM/yyyy"}}</p>
                 <p class="left"> {{ post.username }} </p>
             </div>
         </div>

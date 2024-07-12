@@ -21,7 +21,8 @@ public static class PostMapper
         return new PostDtoUnderUser
         {
             Title = postModel.Title,
-            Content = postModel.Content
+            Content = postModel.Content,
+            CreatedOn = postModel.CreatedOn
         };
     }
 }

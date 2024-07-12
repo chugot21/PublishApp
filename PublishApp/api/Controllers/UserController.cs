@@ -49,6 +49,12 @@ public class UserController : ControllerBase
             }
         );
     }*/
+    // [HttpGet]
+    // [Authorize]
+    // public async Task<IActionResult> GetAllUsername()
+    // {
+    //     
+    // }
     
     [HttpGet("{username}")]
     [Authorize]
@@ -64,10 +70,11 @@ public class UserController : ControllerBase
             new UserPostsDto
             {
                 Username = user.UserName,
-                // FirstName = user.FirstName,
-                // LastName = user.LastName,
-                // BornDateTime = user.BornDateTime,
-                Posts = user.Posts.Select(p => p.ToPostDtoUnderUser()).ToList()
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                BornDateTime = user.BornDateTime,
+                Posts = user.Posts.Select(p => p.ToPostDtoUnderUser())
+                    .OrderByDescending(p => p.CreatedOn).ToList()
             }
         );
     }
@@ -91,6 +98,7 @@ public class UserController : ControllerBase
             new NewUserDto
             {
                 Id = user.Id,
+                Username = user.UserName,
                 Token = _tokenService.CreateToken(user)
             }
         );
@@ -120,6 +128,7 @@ public class UserController : ControllerBase
                     new NewUserDto
                     {
                         Id = user.Id,
+                        Username = user.UserName,
                         Token = _tokenService.CreateToken(user)
                     });
             }
