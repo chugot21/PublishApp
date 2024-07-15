@@ -28,16 +28,14 @@ export class PostsService {
     );
   }
 
-  searchPostByUser(term: string): Observable<UserProfil[]> {
+  searchPostByUser(term: string): Observable<UserProfil | undefined> {
     if (term.length <= 1) {
-      return of([]);
+      return of();
     } else {
-      return this.http
-        .get<UserProfil[]>(`${this.apiUrl}/user/?username=${term}`)
-        .pipe(
-          tap((response) => this.log(response)),
-          catchError((error) => this.handleError(error, [])),
-        );
+      return this.http.get<UserProfil>(`${this.apiUrl}/user/${term}`).pipe(
+        tap((response) => this.log(response)),
+        catchError((error) => this.handleError(error, null)),
+      );
     }
   }
 

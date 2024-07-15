@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { PostsService } from "../posts.service";
-import {PostCreate, PostList} from "../models/PostModel";
-import {Router} from "@angular/router";
-import {DatePipe, NgForOf} from "@angular/common";
-import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {RegisterComponent} from "../register/register.component";
-import {FormsModule} from "@angular/forms";
-import {NewPostComponent} from "../new-post/new-post.component";
-import {SearchPostsByUserComponent} from "../search-posts-by-user/search-posts-by-user.component";
+import { PostCreate, PostList } from "../models/PostModel";
+import { Router } from "@angular/router";
+import { DatePipe, NgForOf } from "@angular/common";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { RegisterComponent } from "../register/register.component";
+import { FormsModule } from "@angular/forms";
+import { NewPostComponent } from "../new-post/new-post.component";
+import { SearchPostsByUserComponent } from "../search-posts-by-user/search-posts-by-user.component";
 
 @Component({
   selector: "app-post",
@@ -32,8 +32,15 @@ export class PostComponent implements OnInit {
 
   addPostDialog() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true; //si on clique a l'exterieur de la fenetre ou esc -> sort de la fenetre
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.closeOnNavigation = true;
+    dialogConfig.position = {
+      left: "10%",
+    };
     this.dialog.open(NewPostComponent, dialogConfig);
   }
 }
+
+// if (document.getElementById("#card-content") === undefined)

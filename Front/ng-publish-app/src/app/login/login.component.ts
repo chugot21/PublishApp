@@ -56,23 +56,21 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  //   registertbtn.addEventListener("click", event => {
+  //     registerbtn.value =
+  // });
+
   registerDialog() {
     //init les valeurs du user ?
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true; //si on clique a l'exterieur de la fenetre ou esc -> sort de la fenetre
     dialogConfig.autoFocus = true; //focus sur le premier element de la fenetre.
-    dialogConfig.width = "60%"; //<<<<<< modif
-
-    // dialogConfig.data = {
-    //   id: 1,
-    //   title: 'Angular For Beginners'
-    // };
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.closeOnNavigation = true;
+    dialogConfig.position = {
+      left: "10%",
+    };
 
     this.dialog.open(RegisterComponent, dialogConfig);
-
-    // const dialogRef = this.dialog.open(RegisterComponent, dialogConfig);
-    // dialogRef.afterClosed().subscribe(
-    //     data => console.log("Dialog output:", data)
-    // );
   }
 }

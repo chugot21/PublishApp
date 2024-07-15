@@ -34,7 +34,7 @@ export class UserProfilComponent implements OnInit {
         .getUserProfil(this.username)
         .subscribe((userProfil: UserProfil) => (this.userProfil = userProfil));
     }
-    console.log(this.userProfil);
+    // console.log(this.userProfil.username);
   }
 
   updateProfil() {}

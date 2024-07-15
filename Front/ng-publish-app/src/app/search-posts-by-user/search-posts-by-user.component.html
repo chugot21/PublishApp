@@ -5,17 +5,22 @@
                 <div class="input-field">
                     <input
                         #searchBox
-                        (keyup)="search(searchBox.value)"
+                        type="text"
+                        (keyup.enter)="search(searchBox.value)"
                         placeholder="Rechercher un utilisateur (saisir un pseudo)"
                     />
-                    <div class="collection">
-                        <a class="collection-item"
-                           *ngFor="let user of userSearch$ | async"
-                                (click)="goToUserProfil(user)">
-                        </a>
-<!--                        test-->
-<!--                            {{ user }}-->
+                    <div *ngIf="!userExist"
+                         class="card-panel red accent-1">
+                        Ce pseudo n'existe pas.
                     </div>
+
+<!--                    <div class="collection">-->
+<!--                        <a class="collection-item"-->
+<!--                           *ngFor="let user of userSearch$ | async"-->
+<!--                                (click)="goToUserProfil(user)">-->
+<!--                        </a>-->
+<!--                        test-->
+<!--                    </div>-->
                 </div>
             </div>
         </div>

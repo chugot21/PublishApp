@@ -16,7 +16,6 @@
 
 
 <form *ngIf="user" (ngSubmit)="onSubmit()" #registerForm="ngForm">
-<!--    <div class='row'>-->
         <div class="col s12 m8 offset-m5">
             <div class="card hoverable">
                 <div class="card-content center">
@@ -88,23 +87,14 @@
                     </div>
                     </div>
 
-<!--                Submit button-->
-                <div class="divider"></div>
-<!--                <div class="section center">-->
-                    <div mat-dialog-actions>
-                    <button type="submit"
-                            class="waves-effect waves-light btn"
-                            [disabled]="!registerForm.form.valid">
-                        Valider</button>
-                    <a class="space"></a>
-                    <a class="waves-effect waves-light btn" (click)="back()">Retour</a>
-
+                    <div>
+                        <button type="submit"
+                                class="waves-effect waves-light btn"
+                                [disabled]="!registerForm.form.valid">
+                            Valider</button>
+                        <a class="space"></a>
+                        <a class="waves-effect waves-light btn" (click)="back()">Retour</a>
                     </div>
-<!--                </div>-->
-
-<!--                    <button class="waves-effect waves-light btn" (click)="save()">Register</button>-->
-<!--                    <a (click)="register(user)" class="waves-effect waves-light btn">Valider</a>-->
             </div>
         </div>
-<!--    </div>-->
 </form>

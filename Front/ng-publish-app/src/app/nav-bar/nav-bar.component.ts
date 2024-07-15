@@ -41,7 +41,7 @@ export class NavBarComponent implements OnInit {
 
   profilUser() {
     let username: string | null = this.storage.getData("username");
-    console.log("username", username);
+    // console.log("username", username);
     this.router.navigate([`/user/${username}`]);
   }
 

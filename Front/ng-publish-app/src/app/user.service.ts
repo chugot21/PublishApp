@@ -18,7 +18,7 @@ export class UserService {
   getUserProfil(username: string | null): Observable<UserProfil> {
     return this.http.get<UserProfil>(`${this.apiUrl}/user/${username}`).pipe(
       tap((response) => this.log(response)),
-      catchError((error) => this.handleError(error, [])),
+      catchError((error) => this.handleError(error, null)),
     );
   }
 

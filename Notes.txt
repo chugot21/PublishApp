@@ -39,11 +39,10 @@ port 4200 front
 
 A faire:
 
--> creation d'une fonction pour recuperer tous les usernames pour le composant search-posts-by-user 
-pour avoir la liste des usernames pour la recherche. Apres redicrection vers userprofilcomponent
-- barre de recherche /Post par post ou user -> regarder pb user dans html search + pb get 
-
-- voir ssl https
+- changer modale popur utiliser show au lieu d'open
+- modale reste si change de page
+- redirection de recherche user a Profil -> ne redirige pas
+- enlever boutton update profil si ce n'est pas l'user en cours 
 - recharger la page apres ajout de post ou register pour prendre en consideration les changements db 
 - faire afficher le modal au dessus du reste z index ?
 - limiter le nombre de modal a afficher (griser le fond)
@@ -59,7 +58,6 @@ A peaufiner:
 
 - encrypt les infos dans le localstorage
 - post.componenet -> voir pour rajouter logo bouton new post materialize.
-- guard ?
 - reorganiser dossier
 
 -regarder powertoys

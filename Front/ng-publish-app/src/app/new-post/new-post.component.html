@@ -1,9 +1,9 @@
 <form *ngIf="post" (ngSubmit)="onSubmit()" #registerForm="ngForm">
     <!--    <div class='row'>-->
     <div class="col s12 m8 offset-m5">
-        <div class="card hoverable">
-            <div class="card-content center">
-                <div mat-dialog-content [formGroup]="form">
+        <div class="card hoverable" >
+            <div class="card-content center" >
+                <div [formGroup]="form">
                     <span class="card-title">Creation d'un post</span>
                 </div>
                 <div class="form-group">
@@ -31,9 +31,9 @@
                     </div>
                 </div>
 <!--                Submit button-->
-<div class="divider"></div>
+
 <!--                <div class="section center">-->
-<div mat-dialog-actions>
+<div>
     <button type="submit"
             class="waves-effect waves-light btn"
             [disabled]="!registerForm.form.valid">
