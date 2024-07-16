@@ -1,22 +1,19 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  Validators,
-} from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 import { NgIf } from "@angular/common";
-import { UserLogin, UserRegister, UserStorage } from "../models/UserModel";
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { UserLogin, UserStorage } from "../models/UserModel";
+import { MatDialog } from "@angular/material/dialog";
 import { RegisterComponent } from "../register/register.component";
 import { StorageService } from "../storage.service";
+import { Button } from "primeng/button";
+import { DialogModule } from "primeng/dialog";
 
 @Component({
   selector: "app-login",
   standalone: true,
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule, NgIf, RegisterComponent, Button, DialogModule],
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.css"],
 })
@@ -24,6 +21,7 @@ export class LoginComponent implements OnInit {
   errorMessage: string = "";
   user = new UserLogin();
   userData: UserStorage;
+  displayModal: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -56,21 +54,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  //   registertbtn.addEventListener("click", event => {
-  //     registerbtn.value =
-  // });
-
   registerDialog() {
-    //init les valeurs du user ?
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true; //si on clique a l'exterieur de la fenetre ou esc -> sort de la fenetre
-    dialogConfig.autoFocus = true; //focus sur le premier element de la fenetre.
-    dialogConfig.hasBackdrop = true;
-    dialogConfig.closeOnNavigation = true;
-    dialogConfig.position = {
-      left: "10%",
-    };
-
-    this.dialog.open(RegisterComponent, dialogConfig);
+    this.displayModal = true;
   }
 }

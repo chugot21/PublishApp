@@ -1,52 +1,41 @@
 <form *ngIf="post" (ngSubmit)="onSubmit()" #registerForm="ngForm">
-    <!--    <div class='row'>-->
-    <div class="col s12 m8 offset-m5">
-        <div class="card hoverable" >
-            <div class="card-content center" >
-                <div [formGroup]="form">
-                    <span class="card-title">Creation d'un post</span>
-                </div>
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title"
-                           required
-                           pattern="^[a-zA-Z0-9àéèç\s]{5,280}$"
-                           [(ngModel)]="post.title" name="title"
-                           #title="ngModel">
-                    <div [hidden]="title.valid || title.pristine"
-                         class="card-panel red accent-1">
-                        Le titre est requis (5-25).
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="content">Content</label>
-                    <input type="text" class="form-control" id="content"
-                           required
-                           pattern="^[a-zA-Z0-9àéèç\s.][^\n]+{5,28}$"
-                           [(ngModel)]="post.content" name="content"
-                           #content="ngModel">
-                    <div [hidden]="content.valid || content.pristine"
-                         class="card-panel red accent-1">
-                        Un contenu est requis (5-280).
-                    </div>
-                </div>
-<!--                Submit button-->
+    <div class="card-content center">
+        <div [formGroup]="form">
+            <span class="card-title">Creation d'un post</span>
+        </div>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title"
+                   required
+                   pattern="^[a-zA-Z0-9àéèç\s]{5,280}$"
+                   [(ngModel)]="post.title" name="title"
+                   #title="ngModel">
+            <div [hidden]="title.valid || title.pristine"
+                 class="card-panel red accent-1">
+                Le titre est requis (5-25).
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="content">Content</label>
+            <input type="text" class="form-control" id="content"
+                   required
+                   pattern="^[a-zA-Z0-9àéèç\s.][^\n]+{5,28}$"
+                   [(ngModel)]="post.content" name="content"
+                   #content="ngModel">
+            <div [hidden]="content.valid || content.pristine"
+                 class="card-panel red accent-1">
+                Un contenu est requis (5-280).
+            </div>
+        </div>
+        <div>
+            <button type="submit"
+                    class="waves-effect waves-light btn"
+                    [disabled]="!registerForm.form.valid">
+                Valider
+            </button>
+            <a class="space"></a>
+            <a class="waves-effect waves-light btn" (click)="cancel()">Retour</a>
 
-<!--                <div class="section center">-->
-<div>
-    <button type="submit"
-            class="waves-effect waves-light btn"
-            [disabled]="!registerForm.form.valid">
-        Valider</button>
-    <a class="space"></a>
-    <a class="waves-effect waves-light btn" (click)="cancel()">Retour</a>
-
-</div>
-<!--                </div>-->
-
-<!--                    <button class="waves-effect waves-light btn" (click)="save()">Register</button>-->
-<!--                    <a (click)="register(user)" class="waves-effect waves-light btn">Valider</a>-->
-</div>
-</div>
+        </div>
     </div>
 </form>

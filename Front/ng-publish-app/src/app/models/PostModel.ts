@@ -15,3 +15,10 @@ export class PostProfil {
   content: string;
   createdOn: Date;
 }
+
+export class ListPagination {
+  postsNumber: number;
+  pageIndex: number = 1;
+  pageSize: number = 5;
+  postsDisplay: PostList[];
+}

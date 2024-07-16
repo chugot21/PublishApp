@@ -32,17 +32,25 @@ public class PostController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
+    public async Task<IActionResult> GetAll([FromQuery] QueryObject query, [FromQuery(Name = "pageIndex")] int? page)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-        
         var posts = await _postRepo.GetAllAsync(query);
+        
+        var postsCount = _context.Posts.AsQueryable().Count();
         
         var postDto = posts.Select(p => p.ToPostDto())
                                         .OrderByDescending(p => p.CreatedOn).ToList();
         
-        return Ok(postDto);
+        var queryModel = new PaginationObject()
+        {
+            PostsNumber = postsCount,
+            PageIndex = page ?? 1,
+            PostsDisplay = postDto,
+        };
+        
+        return Ok(queryModel);
     }
 
     [HttpGet("{postId:int}")]

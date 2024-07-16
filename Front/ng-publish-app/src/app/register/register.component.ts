@@ -1,50 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {AuthService} from "../auth.service";
-import {Router} from "@angular/router";
-import {NgIf} from "@angular/common";
-import {UserLogin, UserRegister} from "../models/UserModel";
+import { Component, OnInit } from "@angular/core";
 import {
-  MAT_DIALOG_DATA,
-  MatDialog, MatDialogActions,
-  MatDialogConfig,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle
-} from '@angular/material/dialog';
-import {Inject} from "@angular/core";
-import {MatInput} from "@angular/material/input";
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from "@angular/forms";
+import { AuthService } from "../auth.service";
+import { NgIf } from "@angular/common";
+import { UserRegister } from "../models/UserModel";
+import { DialogModule } from "primeng/dialog";
+import { Button } from "primeng/button";
+import { LoginComponent } from "../login/login.component";
 
 @Component({
-  selector: 'app-register',
+  selector: "app-register",
   standalone: true,
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    NgIf,
-    MatDialogTitle,
-    MatDialogContent,
-    MatInput,
-    MatDialogActions,
-  ],
-  templateUrl: './register.component.html',
-  styleUrls: ['../login/login.component.css']
+  imports: [FormsModule, ReactiveFormsModule, NgIf, DialogModule, Button],
+  templateUrl: "./register.component.html",
+  styleUrls: ["../login/login.component.css"],
 })
-
 export class RegisterComponent implements OnInit {
-
   form: FormGroup;
-  description:string;
+  description: string;
   user = new UserRegister();
 
   constructor(
-      private authService: AuthService,
-      private fb: FormBuilder,
-      private dialogRef: MatDialogRef<RegisterComponent>,
-) {}
-  //     @Inject(MAT_DIALOG_DATA) data: any) {
-  //   this.description = data.description;
-  // }
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private loginComp: LoginComponent,
+  ) {}
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -53,14 +37,12 @@ export class RegisterComponent implements OnInit {
   }
 
   back() {
-    this.dialogRef.close();
+    this.loginComp.displayModal = false;
   }
 
   onSubmit() {
-    if(this.authService.register(this.user).subscribe())
-    {
-
-      this.dialogRef.close();
+    if (this.authService.register(this.user).subscribe()) {
+      this.loginComp.displayModal = false;
     }
   }
 }

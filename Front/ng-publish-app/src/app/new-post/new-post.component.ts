@@ -6,26 +6,14 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from "@angular/forms";
-import { UserRegister } from "../models/UserModel";
-import { AuthService } from "../auth.service";
-import {
-  MatDialogActions,
-  MatDialogContent,
-  MatDialogRef,
-} from "@angular/material/dialog";
 import { NgIf } from "@angular/common";
 import { PostsService } from "../posts.service";
+import { PostComponent } from "../post/post.component";
 
 @Component({
   selector: "app-new-post",
   standalone: true,
-  imports: [
-    MatDialogActions,
-    FormsModule,
-    MatDialogContent,
-    NgIf,
-    ReactiveFormsModule,
-  ],
+  imports: [FormsModule, NgIf, ReactiveFormsModule],
   templateUrl: "./new-post.component.html",
 })
 export class NewPostComponent implements OnInit {
@@ -36,7 +24,7 @@ export class NewPostComponent implements OnInit {
   constructor(
     private postService: PostsService,
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<NewPostComponent>,
+    private postComp: PostComponent,
   ) {}
 
   ngOnInit() {
@@ -47,11 +35,11 @@ export class NewPostComponent implements OnInit {
 
   onSubmit() {
     this.postService.createPost(this.post).subscribe((response) => {
-      this.dialogRef.close();
+      this.postComp.displayModal = false;
     });
   }
 
   cancel() {
-    this.dialogRef.close();
+    this.postComp.displayModal = false;
   }
 }

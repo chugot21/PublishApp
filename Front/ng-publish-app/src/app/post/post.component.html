@@ -1,7 +1,11 @@
-<div class="container">
+<div class="container" xmlns:itemsPerPage="http://www.w3.org/1999/xhtml">
     <div class="row">
         <app-search-posts-by-user></app-search-posts-by-user>
-        <div *ngFor="let post of postList" class="col s12">
+        <div *ngFor="let post of listPosts.postsDisplay | paginate : {
+            itemsPerPage: listPosts.pageSize,
+            currentPage: listPosts.pageIndex,
+            totalItems: listPosts.postsNumber
+            }; let i = index">
             <div class="divider"></div>
             <div class="section">
                 <h6><strong>{{ post.title }}</strong></h6>
@@ -11,10 +15,24 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-4">
+        <pagination-controls
+                previousLabel="Prev"
+                nextLabel="Next"
+                [responsive]="true"
+                (pageChange)="pageChanged($event)">
+        </pagination-controls>
+        </div>
+    </div>
 </div>
-<button (click)="addPostDialog()" class="btn waves-effect waves-light" type="submit"
-   style="position: fixed; bottom: 25px; right: 25px"
->
+
+
+
+<button (click)="addPostDialog()" class="btn waves-effect waves-light" type="submit" style="position: fixed; bottom: 25px; right: 25px">
     New Post
-    <i class="material-icons right"></i> <!--add "send" dans la balise si l'on veut afficher l'icone-->
+    <i class="material-icons right"></i>
+    <p-dialog [(visible)]="displayModal" [style]="{ width: '50vw' }" [modal]="true">
+        <app-new-post></app-new-post>
+    </p-dialog>
 </button>

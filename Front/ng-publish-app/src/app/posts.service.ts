@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { catchError, Observable, of, tap } from "rxjs";
-import { PostCreate, PostList } from "./models/PostModel";
+import { ListPagination, PostCreate, PostList } from "./models/PostModel";
 import { StorageService } from "./storage.service";
 import { UserProfil } from "./models/UserModel";
 
@@ -21,11 +21,13 @@ export class PostsService {
     return this.http.post<any>(`${this.apiUrl}/Post/${userId}`, post);
   }
 
-  getPostList(): Observable<PostList[]> {
-    return this.http.get<PostList[]>(`${this.apiUrl}/Post`).pipe(
-      tap((response) => this.log(response)),
-      catchError((error) => this.handleError(error, [])),
-    );
+  getPostList(pageIndex: number): Observable<ListPagination> {
+    return this.http
+      .get<ListPagination>(`${this.apiUrl}/Post?pageIndex=${pageIndex}`)
+      .pipe(
+        tap((response) => this.log(response)),
+        catchError((error) => this.handleError(error, null)),
+      );
   }
 
   searchPostByUser(term: string): Observable<UserProfil | undefined> {

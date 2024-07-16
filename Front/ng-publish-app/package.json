@@ -10,7 +10,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^17.3.0",
+    "@angular/animations": "^17.3.11",
     "@angular/cdk": "~18.0.6",
     "@angular/common": "^17.3.0",
     "@angular/compiler": "^17.3.0",
@@ -25,6 +25,8 @@
     "@developer-partners/ngx-modal-dialog": "^1.0.5",
     "crypto-js": "^4.2.0",
     "express": "^4.18.2",
+    "ngx-pagination": "^6.0.3",
+    "primeng": "^17.18.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

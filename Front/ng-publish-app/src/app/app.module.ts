@@ -13,6 +13,9 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AuthGuard } from "./auth.guard";
+import { ButtonModule } from "primeng/button";
+import { DialogModule } from "primeng/dialog";
+import { NgxPaginationModule } from "ngx-pagination";
 
 @NgModule({
   declarations: [],
@@ -27,6 +30,9 @@ import { AuthGuard } from "./auth.guard";
     MatDialogModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    ButtonModule,
+    DialogModule,
+    NgxPaginationModule,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
 })

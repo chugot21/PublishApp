@@ -18,8 +18,10 @@
             <div class="card-action center">
                 <a (click)="login(user)" class="waves-effect waves-light btn">Log In</a>
                 <a class="space"></a>
-<!--                <button id="registerbtn" class="waves-effect waves-light btn">Register</button>-->
-                <a (click)="registerDialog()" class="waves-effect waves-light btn">Register</a>
+                <button class="waves-effect waves-light btn" (click)="registerDialog()">Register</button>
+                <p-dialog [(visible)]="displayModal" [style]="{ width: '50vw' }" [modal]="true">
+                    <app-register></app-register>
+                </p-dialog>
             </div>
         </div>
     </div>

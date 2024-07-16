@@ -39,20 +39,20 @@ port 4200 front
 
 A faire:
 
-- changer modale popur utiliser show au lieu d'open
-- modale reste si change de page
+-voir dans le back, GetAll -> GetAllAsync -> utiliser ma nouvelle query plutot que l'ancienne
+
+- pagination
+- modifier dernier post
+- recharger la page apres ajout de post ou register pour prendre en consideration les changements db 
 - redirection de recherche user a Profil -> ne redirige pas
 - enlever boutton update profil si ce n'est pas l'user en cours 
-- recharger la page apres ajout de post ou register pour prendre en consideration les changements db 
-- faire afficher le modal au dessus du reste z index ?
-- limiter le nombre de modal a afficher (griser le fond)
 - [bonus] bouton pour modifier profil
 - [bonus] rajouter photo profil
 
 
 A peaufiner:
+- si user existe deja au moment du register -> back renvoie erreur 500 -> afficher message.
 - erreur localstorage avant login car le token n'a pas encore ete cree. auth.interceptor le recherche avant sa creation.
-- register -> fenetre a centrer voir par rapport a materialize et les classes Matdialog
 - register -> voir pour condition mdp, pattern si echoue dans onSubmit() afficher message user ou message erreur et rester sur la fenetre.
 - new-post -> idem pour onSubmit conditions
 
