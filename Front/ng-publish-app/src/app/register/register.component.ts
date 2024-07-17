@@ -11,6 +11,8 @@ import { UserRegister } from "../models/UserModel";
 import { DialogModule } from "primeng/dialog";
 import { Button } from "primeng/button";
 import { LoginComponent } from "../login/login.component";
+import { ToastrService } from "ngx-toastr";
+import { firstValueFrom, Observable } from "rxjs";
 
 @Component({
   selector: "app-register",
@@ -23,11 +25,15 @@ export class RegisterComponent implements OnInit {
   form: FormGroup;
   description: string;
   user = new UserRegister();
+  userRegister$: Observable<UserRegister>;
+  userError: boolean = false;
+  messageError: string = "";
 
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
     private loginComp: LoginComponent,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit() {
@@ -40,9 +46,39 @@ export class RegisterComponent implements OnInit {
     this.loginComp.displayModal = false;
   }
 
-  onSubmit() {
-    if (this.authService.register(this.user).subscribe()) {
-      this.loginComp.displayModal = false;
+  async onSubmit() {
+    this.userRegister$ = this.authService.register(this.user);
+    let promise = await firstValueFrom(this.userRegister$)
+      .then((userRegister: UserRegister) => {
+        this.user = userRegister;
+        this.userError = false;
+      })
+      .catch((error) => {
+        this.userError = true;
+        console.log(error);
+        this.messageError = "";
+        for (var i: number = 0; error.error[i]; i++) {
+          if (i === 0) {
+            this.messageError = error.error[i].description;
+          } else {
+            this.messageError += "<br>" + error.error[i].description;
+          }
+        }
+      });
+
+    this.loginComp.displayModal = false;
+    if (!this.userError) {
+      // this.loginComp.displayModal = false;
+      this.toastr.success(
+        "Vous venez de vous enregistrer avec succes !",
+        "Register",
+        { positionClass: "toast-bottom-left" },
+      );
+    } else {
+      this.toastr.error(this.messageError, "Not register", {
+        positionClass: "toast-bottom-left",
+        enableHtml: true,
+      });
     }
   }
 }

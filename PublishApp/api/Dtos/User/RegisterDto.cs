@@ -15,5 +15,4 @@ public class RegisterDto
     public DateTime BornDateTime { get; set; }
     [Required]
     public string? Password { get; set; }
-    //public List<PostDto> Posts { get; set; } // a sup ?
 }

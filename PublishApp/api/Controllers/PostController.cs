@@ -34,6 +34,7 @@ public class PostController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] QueryObject query, [FromQuery(Name = "pageIndex")] int? page)
     {
+        query.PageIndex = page ?? 1;
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         var posts = await _postRepo.GetAllAsync(query);

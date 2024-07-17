@@ -16,6 +16,8 @@ import { AuthGuard } from "./auth.guard";
 import { ButtonModule } from "primeng/button";
 import { DialogModule } from "primeng/dialog";
 import { NgxPaginationModule } from "ngx-pagination";
+import { ToastrModule } from "ngx-toastr";
+import { HubConnection } from "@microsoft/signalr";
 
 @NgModule({
   declarations: [],
@@ -33,6 +35,7 @@ import { NgxPaginationModule } from "ngx-pagination";
     ButtonModule,
     DialogModule,
     NgxPaginationModule,
+    ToastrModule.forRoot(),
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
 })

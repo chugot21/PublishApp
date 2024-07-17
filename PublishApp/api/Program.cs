@@ -100,8 +100,10 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
+app.MapHub<ImportAppointmentsNotificationHub>("/Notify");
 app.UseCors(x => x
     .SetIsOriginAllowed(origin => true)
     .AllowAnyMethod()

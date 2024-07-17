@@ -31,7 +31,7 @@ Pages :
                             -> filtre recherche user pour voir leur comments.
         -> (option) page modif profil
 
-
+toaster
 
 port 5173 back 
 port 4200 front
@@ -39,9 +39,11 @@ port 4200 front
 
 A faire:
 
--voir dans le back, GetAll -> GetAllAsync -> utiliser ma nouvelle query plutot que l'ancienne
 
-- pagination
+pollin -> requete de nouveau apres un temps imparti pour recharger les posts.
+notif push with signalr -> pour faire aparaitre une notif quand il y a une modif sur la page  
+
+- pagination -> design
 - modifier dernier post
 - recharger la page apres ajout de post ou register pour prendre en consideration les changements db 
 - redirection de recherche user a Profil -> ne redirige pas

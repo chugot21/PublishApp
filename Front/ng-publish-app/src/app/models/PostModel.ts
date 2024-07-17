@@ -22,3 +22,9 @@ export class ListPagination {
   pageSize: number = 5;
   postsDisplay: PostList[];
 }
+
+export class Notification {
+  public userId: string;
+  public name: string;
+  public message: string;
+}

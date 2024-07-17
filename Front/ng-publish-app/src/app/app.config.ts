@@ -10,6 +10,7 @@ import {
 } from "@angular/common/http";
 import { AuthInterceptor } from "./auth.interceptor";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { provideToastr } from "ngx-toastr";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,5 +23,6 @@ export const appConfig: ApplicationConfig = {
     },
     provideHttpClient(withInterceptorsFromDi()),
     importProvidersFrom([BrowserAnimationsModule]),
+    provideToastr(),
   ],
 };

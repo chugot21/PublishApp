@@ -12,11 +12,12 @@
                 <p> {{ post.content }}</p>
                 <p class="right"> {{ post.createdOn | date:"dd/MM/yyyy"}}</p>
                 <p class="left"> {{ post.username }} </p>
+            <div class="space"></div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 center">
         <pagination-controls
                 previousLabel="Prev"
                 nextLabel="Next"
@@ -26,9 +27,6 @@
         </div>
     </div>
 </div>
-
-
-
 <button (click)="addPostDialog()" class="btn waves-effect waves-light" type="submit" style="position: fixed; bottom: 25px; right: 25px">
     New Post
     <i class="material-icons right"></i>

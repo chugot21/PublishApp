@@ -53,8 +53,8 @@ export class SearchPostsByUserComponent implements OnInit {
         this.userProfil = userProfil;
       })
       .catch((error) => console.log(error));
-    // .subscribe((userProfil: UserProfil) => (this.userProfil = userProfil));
-    console.log(this.userProfil);
+
+    // console.log(this.userProfil);
     if (this.userProfil) {
       this.userExist = true;
       this.router.navigate([`/user/${term}`]);

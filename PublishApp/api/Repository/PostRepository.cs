@@ -3,7 +3,9 @@ using api.Dtos.User;
 using api.Helpers;
 using api.Interfaces;
 using api.Models;
+using api.Service;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Repository;
@@ -22,11 +24,11 @@ public class PostRepository : IPostRepository
     
     public async Task<List<Post>> GetAllAsync(QueryObject query)
     {
-        var posts =  _context.Posts.AsQueryable();
+        var posts = _context.Posts.AsQueryable();
         
-        var skipNumber = (query.PageNumber - 1) * query.PageSize;
+        var skipNumber = (query.PageIndex - 1) * query.PageSize;
 
-        return await posts.Skip(skipNumber).Take(query.PageSize).ToListAsync();
+        return await posts.OrderByDescending(p => p.CreatedOn).Skip(skipNumber).Take(query.PageSize).ToListAsync();
     }
 
     public async Task<Post?> GetByIdAsync(int id)
