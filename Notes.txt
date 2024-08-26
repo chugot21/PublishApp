@@ -1,10 +1,11 @@
+PublishApp
 
 BACK
 
-utilisation de pgAdmin 4 pour la DB postgresql.
+Utilisation de pgAdmin 4 pour la DB postgresql
 
 Modeles :
-- User : atributs : ID, pseudo, nom, prenom, date de naissance : herite de la classe IdentityUser
+- User : attributs : ID, pseudo, nom, prenom, date de naissance : herite de la classe IdentityUser
         (option) photo profil
 - Post : Id, titre, contenu, date de creation, utilisateur lie (one to one)
 
@@ -12,61 +13,18 @@ Controller :
 - User : POST-login (pseudo, mdp hashe)
         GET-rechercher un user
         (option) PUT-modif user (tout peut changer sauf pseudo)
-- Post : POST-create(titre, contenu)
+- Post : POST-create(titre, contenu) (utiliser les polling -> requete de nouveau apres un temps imparti 						pour recharger les posts.)
         DELETE dernier post uniquement et si user
 
-
-DTO:
-- Post : date, contenu, user 
-
-=> Schema DB avec EF
-
+=> Schema DB avec EF (entity framework)
 
 FRONT 
 
 Pages :
 - Login -> page erreur
-        -> page des posts + bouton nouveau post : ordre chronologique + pagination des posts (20 derniers) -> pseudo, contenu, bouton
-                            -> "page" creation en modale pour nv post.
-                            -> filtre recherche user pour voir leur comments.
-        -> (option) page modif profil
+        	-> page des posts + bouton nouveau post : ordre chronologique + pagination des posts (20 	derniers) -> pseudo, contenu, bouton
+                            -> "page" creation en modale pour nouveau post.
+                            -> filtre recherche user pour voir leurs comments.
+       	 -> (option) page modif profil
 
-toaster
-
-port 5173 back 
-port 4200 front
-
-
-A faire:
-
-
-pollin -> requete de nouveau apres un temps imparti pour recharger les posts.
-notif push with signalr -> pour faire aparaitre une notif quand il y a une modif sur la page  
-
-- pagination -> design
-- modifier dernier post
-- recharger la page apres ajout de post ou register pour prendre en consideration les changements db 
-- redirection de recherche user a Profil -> ne redirige pas
-- enlever boutton update profil si ce n'est pas l'user en cours 
-- [bonus] bouton pour modifier profil
-- [bonus] rajouter photo profil
-
-
-A peaufiner:
-- si user existe deja au moment du register -> back renvoie erreur 500 -> afficher message.
-- erreur localstorage avant login car le token n'a pas encore ete cree. auth.interceptor le recherche avant sa creation.
-- register -> voir pour condition mdp, pattern si echoue dans onSubmit() afficher message user ou message erreur et rester sur la fenetre.
-- new-post -> idem pour onSubmit conditions
-
-- encrypt les infos dans le localstorage
-- post.componenet -> voir pour rajouter logo bouton new post materialize.
-- reorganiser dossier
-
--regarder powertoys
-
-
-
-{{variable ou class | json}} -> afficher details de la variable ou de la class
-cmd + click pour mettre pls curseurs et double click sur les mots qu'on veut modifier.
-click droit entre numero de ligne et ligne et git blam
-click droit ->localhistory -> show history ou show history for selection
+Ajouter des toaster pour les messages d'erreur
