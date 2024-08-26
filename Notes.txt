@@ -13,7 +13,7 @@ Controller :
 - User : POST-login (pseudo, mdp hashe)
         GET-rechercher un user
         (option) PUT-modif user (tout peut changer sauf pseudo)
-- Post : POST-create(titre, contenu) (utiliser les polling -> requete de nouveau apres un temps imparti 						pour recharger les posts.)
+- Post : POST-create(titre, contenu) (utiliser les polling -> requete de nouveau apres un temps imparti pour recharger les posts.)
         DELETE dernier post uniquement et si user
 
 => Schema DB avec EF (entity framework)
@@ -22,7 +22,7 @@ FRONT
 
 Pages :
 - Login -> page erreur
-        	-> page des posts + bouton nouveau post : ordre chronologique + pagination des posts (20 	derniers) -> pseudo, contenu, bouton
+        	-> page des posts + bouton nouveau post : ordre chronologique + pagination des posts (20 derniers) -> pseudo, contenu, bouton
                             -> "page" creation en modale pour nouveau post.
                             -> filtre recherche user pour voir leurs comments.
        	 -> (option) page modif profil
